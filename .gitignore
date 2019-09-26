@@ -1,0 +1,11 @@
+*.log
+.idea
+.DS_Store
+
+.settings
+.project
+.classpath
+
+node_modules/
+output/
+.vscode/

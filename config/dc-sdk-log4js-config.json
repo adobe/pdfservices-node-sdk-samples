@@ -1,0 +1,21 @@
+{
+	"appenders": {
+		"consoleAppender": {
+            "_comment": "A sample console appender configuration, Clients can change as per their logging implementation",
+			"type": "console",
+			"layout": {
+				"type": "pattern",
+				"pattern": "%d:[%p]: %m"
+			}
+		}
+	},
+	"categories": {
+		"default": {
+			"appenders": [
+				"consoleAppender"
+            ],
+            "_comment": "Change the logging levels as per need. info is recommended for dc-services-node-sdk",
+			"level": "info"
+		}
+	}
+}
