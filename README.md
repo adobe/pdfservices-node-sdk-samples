@@ -54,6 +54,14 @@ The sample script ```create-pdf-from-docx.js``` creates a PDF file from a DOCX f
 node src/createpdf/create-pdf-from-docx.js
 ```
 
+#### Create a PDF File From a DOCX Readable Stream
+
+The sample script ```create-pdf-from-docx-stream.js``` creates a PDF file from a readable DOCX stream.
+
+```$xslt
+node src/createpdf/create-pdf-from-docx-stream.js
+```
+
 #### Create a PDF File From a DOCX File (Write to an OutputStream)
 
 The sample script ```create-pdf-from-docx-to-output-stream.js``` creates a PDF file from a DOCX file. Instead of saving the result to a 
