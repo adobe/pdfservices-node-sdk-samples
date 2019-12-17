@@ -42,6 +42,8 @@ try {
     createPdfOperation.setInput(input);
 
     const writeStream = prepareWriteStream();
+    // Define a callback function that executes once the stream write is finished
+    writeStream.on('finish', () => console.log('Stream Write Finished'));
 
     // Execute the operation and Write the result to stream.
     createPdfOperation.execute(clientContext)
