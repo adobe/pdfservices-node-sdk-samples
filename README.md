@@ -3,23 +3,28 @@
 This sample project helps you get started with the DC services SDK.
 
 The sample JS scripts illustrate how to perform PDF-related actions (such as converting to and from the PDF format) using 
-the SDK.
+the SDK. **Please note that the DC Services SDK supports only server side use cases.**
 
 ## Prerequisites
 The sample application has the following requirements:
-* Node JS : Version 10.0 or above. Node installation instructions can be found 
+* Node JS : Version 10.13 or above. Node installation instructions can be found 
 [here](https://nodejs.org/en/download/).
 
 
 ## Authentication Setup
 
-The configuration file for the samples is ```dc-services-sdk-config.json```. Before the samples can be run, replace this 
-file with the dc-services-sdk-config.json you receive from Adobe when you submit the early access request form. 
+The credentials file and corresponding private key file for the samples is ```dc-services-sdk-credentials.json``` and ```private.key``` 
+respectively. Before the samples can be run, replace both the files with the ones present in the downloaded zip file at 
+the end of creation of credentials via [Get Started](https://www.adobe.io/apis/documentcloud/dcsdk/gettingstarted.html?ref=getStartedWithServicesSdk) workflow.
 
 The SDK also supports providing the authentication credentials at runtime, without storing them in a config file. Please
 refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-in-memory-authentication-credentials) to 
 know more.
 
+## Quota Exhaustion
+
+If you receive ServiceUsageException during the Samples run, it means that trial credentials have exhausted their quota 
+of 5000 pages. Please contact [here](https://www.stage.adobe.io/apis/documentcloud/dcsdk31/form.html) to get the paid credentials.
 
 ## Build with npm
 
@@ -44,7 +49,8 @@ files used by the samples can be found in the ```resources``` folder. When execu
 child folder under the project root directory to store their results.
 
 ### Create a PDF File
-These samples illustrate how to convert files of some formats to PDF. Refer the sdk documentation of create-pdf-operation.js to see the list of all supported media types which can be converted to PDF.
+These samples illustrate how to convert files of some formats to PDF. Refer the sdk documentation of create-pdf-operation.js 
+to see the list of all supported media types which can be converted to PDF.
 
 #### Create a PDF File From a DOCX File 
 
@@ -82,6 +88,11 @@ Before running the sample, authentication credentials need to be updated as per 
 node src/createpdf/create-pdf-with-inmemory-auth-credentials.js
 ```
 
+#### Create a PDF File From a DOCX File(By providing custom value for timeouts)
+The sample project ```create-pdf-with-custom-timeouts``` highlights how to provide the custom value for connection timeout and socket timeout.
+```$xslt
+node src/createpdf/create-pdf-with-custom-timeouts.js
+```
 
 ####  Create a PDF File From a PPTX File 
 
@@ -91,21 +102,22 @@ The sample script ```create-pdf-from-pptx.js``` creates a PDF file from a PPTX f
 node src/createpdf/create-pdf-from-pptx.js
 ```
 
-#### Create a PDF File From HTML (via Zip Archive)
+#### Create a PDF File From Static HTML (via Zip Archive)
 
-The sample script ```create-pdf-from-html.js``` creates a PDF file from a zip file containing the input HTML file and its resources. 
+The sample script ```create-pdf-from-static-html.js``` creates a PDF file from a zip file containing the input HTML file and its resources. 
 Please refer the sdk documentation of create-pdf-operation.js to see instructions on the structure of the zip file.
 
 ```$xslt
-node src/createpdf/create-pdf-from-html.js
+node src/createpdf/create-pdf-from-static-html.js
 ```
 
-#### Create a PDF File From HTML (via URL)
 
-The sample script ```create-pdf-from-url.js``` converts an HTML page specified by a URL to a PDF file.
+#### Create a PDF File From Dynamic HTML (via Zip Archive)
+
+The sample script ```create-pdf-from-dynamic-html.js``` converts a zip file, containing the input HTML file and its resources, along with the input data to a PDF file. The input data is used by the javascript in the HTML file to manipulate the HTML DOM, thus effectively updating the source HTML file. This mechanism can be used to provide data to the template HTML dynamically and then, convert it into a PDF file.
 
 ```$xslt
-node src/createpdf/create-pdf-from-url.js
+node src/createpdf/create-pdf-from-dynamic-html.js
 ```
 
 ### Export PDF To Other Formats
@@ -143,10 +155,30 @@ node src/combine/combine-pdf.js
 
 #### Combine Specific Pages of Multiple PDF Files
 
-The sample script ```combine-pdf-with-page-ranges.js``` combines specific pages of multiple PDF files into a single PDF file.
+The sample script ```combine-pdf-with-page-ranges.js``` combines specific pages of multiple PDF files into into a single PDF file.
  
 ```$xslt
 node src/combine/combine-pdf-with-page-ranges.js
+```
+
+### OCR PDF File
+These samples illustrates how to apply OCR(Optical Character Recognition) to a PDF file and convert it to a searchable copy of your PDF. The supported input format is application/pdf.
+
+#### Convert PDF File to a searchable PDF file
+
+The sample script ```ocr-pdf``` converts a PDF file into a searchable PDF file.
+
+```$xslt
+node src/ocr/ocr-pdf.js
+```
+
+#### Convert PDF file into a searchable file while keeping the original image.
+
+The sample script ```ocr-pdf-with-options``` converts a PDF file to a searchable PDF file with maximum fidelity to the original image and default en-us locale. Refer to the documentation of ocr-options.js
+to see the list of supported OCR locales and OCR types.
+
+```$xslt
+node src/ocr/ocr-pdf-with-options.js
 ```
 
 ### Licensing

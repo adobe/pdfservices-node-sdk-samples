@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const DCServicesSdk = require('@adobe/dc-services-node-sdk');
+const DCServicesSdk = require('@dcloud/dc-services-node-sdk');
 
 /**
  * This sample illustrates how to export a PDF file to JPEG.
@@ -20,8 +20,14 @@ const DCServicesSdk = require('@adobe/dc-services-node-sdk');
  */
 
 try {
-    // Initial setup, create a ClientContext using a config file, and a new operation instance by specifying the intended export format.
-    const clientContext = DCServicesSdk.ClientContext.createFromFile('dc-services-sdk-config.json'),
+    // Initial setup, create credentials instance.
+    const credentials =  DCServicesSdk.Credentials
+        .serviceAccountCredentialsBuilder()
+        .fromFile("dc-services-sdk-credentials.json")
+        .build();
+
+    //Create an ExecutionContext using credentials and create a new operation instance.
+    const executionContext = DCServicesSdk.ExecutionContext.create(credentials),
         exportPDF = DCServicesSdk.ExportPDF,
         exportPdfOperation = exportPDF.Operation.createNew(exportPDF.SupportedTargetFormats.JPEG);
 
@@ -30,9 +36,16 @@ try {
     exportPdfOperation.setInput(input);
 
     // Execute the operation and Save the result to the specified location.
-    exportPdfOperation.execute(clientContext)
+    exportPdfOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/exportPDFToJPEG.zip'))
-        .catch(err => console.log('Exception encountered while executing operation', err));
+        .catch(err => {
+            if(err instanceof DCServicesSdk.Error.ServiceApiError
+                || err instanceof DCServicesSdk.Error.ServiceUsageError) {
+                console.log('Exception encountered while executing operation', err);
+            } else {
+                console.log('Exception encountered while executing operation', err);
+            }
+        });
 } catch (err) {
     console.log('Exception encountered while executing operation', err);
 }
