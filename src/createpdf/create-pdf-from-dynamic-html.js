@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const DCServicesSdk = require('@dcloud/dc-services-node-sdk');
+const DCServicesSdk = require('@adobe/dc-services-node-sdk');
 /**
  * This sample illustrates how to convert an HTML file to PDF. The HTML file and its associated dependencies must be
  * in a single ZIP file.

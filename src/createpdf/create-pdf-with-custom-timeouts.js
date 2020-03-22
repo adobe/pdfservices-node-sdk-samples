@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const DCServicesSdk = require('@dcloud/dc-services-node-sdk');
+const DCServicesSdk = require('@adobe/dc-services-node-sdk');
 
 /**
  * This sample illustrates how to provide custom http timeouts for performing an operation. This enables the

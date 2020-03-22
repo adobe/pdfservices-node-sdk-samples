@@ -8,7 +8,7 @@
  * then your use, modification, or distribution of it requires the prior
  * written permission of Adobe.
  */
-const DCServicesSdk = require('@dcloud/dc-services-node-sdk');
+const DCServicesSdk = require('@adobe/dc-services-node-sdk');
 /**
  * This sample illustrates how to perform an OCR operation on a PDF file with explicit supported-locale
  * and convert it into an editable PDF file.

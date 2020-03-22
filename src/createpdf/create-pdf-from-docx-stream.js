@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const DCServicesSdk = require('@dcloud/dc-services-node-sdk'),
+const DCServicesSdk = require('@adobe/dc-services-node-sdk'),
     fs = require('fs');
 
 /**
