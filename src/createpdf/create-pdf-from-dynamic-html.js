@@ -11,8 +11,9 @@
 
 const DCServicesSdk = require('@adobe/dc-services-node-sdk');
 /**
- * This sample illustrates how to convert an HTML file to PDF. The HTML file and its associated dependencies must be
- * in a single ZIP file.
+ * This sample illustrates how to provide data inputs to an HTML file before converting it to PDF. The data input is used
+ * by the javascript in the HTML file to manipulate the HTML DOM, thus effectively updating the source HTML file.
+ * This mechanismn can be used to provide data to the template HTML dynamically and convert it into a PDF file.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
@@ -26,7 +27,7 @@ const setCustomOptions = (htmlToPDFOperation) => {
     // Define the page layout, in this case an 8 x 11.5 inch page (effectively portrait orientation).
     const pageLayout = new DCServicesSdk.CreatePDF.options.PageLayout();
     pageLayout.setPageSize(8, 11.5);
-    //Set the dataToMerge field that needs to be populated in the generated pdf.
+    //Set the dataToMerge field that needs to be populated in the HTML before its conversion.
     const dataToMerge = {
         "title":"Create, Convert PDFs and More!",
         "sub_title": "Easily integrate PDF actions within your document workflows."

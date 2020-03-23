@@ -10,8 +10,9 @@
  */
 const DCServicesSdk = require('@adobe/dc-services-node-sdk');
 /**
- * This sample illustrates how to perform an OCR operation on a PDF file with explicit supported-locale
- * and convert it into an editable PDF file.
+ * This sample illustrates how to perform an OCR operation on a PDF file and convert it into an searchable PDF file on
+ * the basis of provided locale and SEARCHABLE_IMAGE_EXACT ocr type to keep the original image
+ * (Recommended for cases requiring maximum fidelity to the original image.).
  * <p>
  * Note that OCR operation on a PDF file results in a PDF file.
  * <p>
