@@ -33,8 +33,14 @@ const prepareWriteStream = () => {
 };
 
 try {
-    // Initial setup, create a ClientContext using a config file, and a new operation instance.
-    const clientContext = DCServicesSdk.ClientContext.createFromFile('dc-services-sdk-config.json'),
+    // Initial setup, create credentials instance.
+    const credentials =  DCServicesSdk.Credentials
+        .serviceAccountCredentialsBuilder()
+        .fromFile("dc-services-sdk-credentials.json")
+        .build();
+
+    // Create an ExecutionContext using credentials and create a new operation instance.
+    const executionContext = DCServicesSdk.ExecutionContext.create(credentials),
         createPdfOperation = DCServicesSdk.CreatePDF.Operation.createNew();
 
     // Set operation input from a source file.
@@ -46,9 +52,16 @@ try {
     writeStream.on('finish', () => console.log('Stream Write Finished'));
 
     // Execute the operation and Write the result to stream.
-    createPdfOperation.execute(clientContext)
+    createPdfOperation.execute(executionContext)
         .then(result => result.writeToStream(writeStream))
-        .catch(err => console.log('Exception encountered while executing operation', err));
+        .catch(err => {
+            if(err instanceof DCServicesSdk.Error.ServiceApiError
+                || err instanceof DCServicesSdk.Error.ServiceUsageError) {
+                console.log('Exception encountered while executing operation', err);
+            } else {
+                console.log('Exception encountered while executing operation', err);
+            }
+        });
 } catch (err) {
     console.log('Exception encountered while executing operation', err);
 }

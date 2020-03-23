@@ -20,29 +20,39 @@ const DCServicesSdk = require('@adobe/dc-services-node-sdk');
 
 
 try {
-    // Initial setup, create a ClientContext using a config file, and a new operation instance.
-    const clientContext = DCServicesSdk.ClientContext.createFromFile('dc-services-sdk-config.json'),
+    /*
+    Initial setup, create credentials instance.
+    Replace the values of CLIENT_ID, CLIENT_SECRET, ORGANIZATION_ID and ACCOUNT_ID with their corresponding values
+    present in the dc-services-sdk-credentials.json file and PRIVATE_KEY_FILE_CONTENTS with contents of private.key file
+    within the zip file which must have been downloaded at the end of Getting the Credentials workflow.
+    */
+    const credentials = DCServicesSdk.Credentials.serviceAccountCredentialsBuilder()
+        .withClientId("CLIENT_ID")
+        .withClientSecret("CLIENT_SECRET")
+        .withPrivateKey("PRIVATE_KEY_FILE_CONTENTS")
+        .withOrganizationId("ORGANIZATION_ID")
+        .withAccountId("ACCOUNT_ID")
+        .build();
+
+    // Create an ExecutionContext using credentials and create a new operation instance.
+    const executionContext = DCServicesSdk.ExecutionContext.create(credentials),
         createPdfOperation = DCServicesSdk.CreatePDF.Operation.createNew();
 
     // Set operation input from a source file.
     const input = DCServicesSdk.FileRef.createFromLocalFile('resources/createPDFInput.docx');
     createPdfOperation.setInput(input);
 
-    /*
-    Set this variable to the value of "identity" key in dc-services-sdk-config.json that you received in Adobe
-    Document Cloud Services SDK welcome email
-    */
-    const authenticationJsonString = '';
-    // Create a new ClientContext instance with the provided authentication credentials.
-    const authentication = DCServicesSdk.Authentication.createFromJson(authenticationJsonString),
-        contextWithAuth = clientContext.withAuthentication(authentication);
-
     // Execute the operation and Save the result to the specified location.
-    createPdfOperation.execute(contextWithAuth)
-        .then(result => result.saveAsFile('output/createPDFWithInMemCredentials.pdf'))
-        .catch(err => console.log('Exception encountered while executing operation', err));
+    createPdfOperation.execute(executionContext)
+        .then(result => result.saveAsFile('output/createPDFFromDOCXInMemAuthCredOutput.pdf'))
+        .catch(err => {
+            if(err instanceof DCServicesSdk.Error.ServiceApiError
+                || err instanceof DCServicesSdk.Error.ServiceUsageError) {
+                console.log('Exception encountered while executing operation', err);
+            } else {
+                console.log('Exception encountered while executing operation', err);
+            }
+        });
 } catch (err) {
-    console.log('Please note that the variable authenticationJsonString needs to be initialized with the value of "identity"' +
-                    ' key in dc-services-sdk-config.json file.');
     console.log('Exception encountered while executing operation', err);
 }

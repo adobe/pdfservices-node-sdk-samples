@@ -40,8 +40,14 @@ const getPageRangesForSecondFile = () => {
 };
 
 try {
-    // Initial setup, create a ClientContext using a config file, and a new operation instance.
-    const clientContext = DCServicesSdk.ClientContext.createFromFile('dc-services-sdk-config.json'),
+    // Initial setup, create credentials instance.
+    const credentials =  DCServicesSdk.Credentials
+        .serviceAccountCredentialsBuilder()
+        .fromFile("dc-services-sdk-credentials.json")
+        .build();
+
+    // Create an ExecutionContext using credentials and create a new operation instance.
+    const executionContext = DCServicesSdk.ExecutionContext.create(credentials),
         combineFilesOperation = DCServicesSdk.CombineFiles.Operation.createNew();
 
     // Create a FileRef instance from a local file.
@@ -57,9 +63,16 @@ try {
     combineFilesOperation.addInput(combineSource2, pageRangesForSecondFile);
 
     // Execute the operation and Save the result to the specified location.
-    combineFilesOperation.execute(clientContext)
+    combineFilesOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/combineFilesWithPageRangesOutput.pdf'))
-        .catch(err => console.log('Exception encountered while executing operation', err));
+        .catch(err => {
+            if(err instanceof DCServicesSdk.Error.ServiceApiError
+                || err instanceof DCServicesSdk.Error.ServiceUsageError) {
+                console.log('Exception encountered while executing operation', err);
+            } else {
+                console.log('Exception encountered while executing operation', err);
+            }
+        });
 } catch (err) {
     console.log('Exception encountered while executing operation', err);
 }
