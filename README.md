@@ -23,7 +23,7 @@ know more.
 
 ## Quota Exhaustion
 
-If you receive ServiceUsageException during the Samples run, it means that trial credentials have exhausted their quota 
+If you receive ServiceUsageError during the Samples run, it means that trial credentials have exhausted their quota 
 of 5000 pages. Please contact [here](https://www.stage.adobe.io/apis/documentcloud/dcsdk31/form.html) to get the paid credentials.
 
 ## Build with npm
@@ -89,7 +89,7 @@ node src/createpdf/create-pdf-with-inmemory-auth-credentials.js
 ```
 
 #### Create a PDF File From a DOCX File(By providing custom value for timeouts)
-The sample project ```create-pdf-with-custom-timeouts``` highlights how to provide the custom value for connection timeout and socket timeout.
+The sample script ```create-pdf-with-custom-timeouts``` highlights how to provide the custom value for connection timeout and read timeout.
 ```$xslt
 node src/createpdf/create-pdf-with-custom-timeouts.js
 ```
