@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const DCServicesSdk = require('@adobe/dc-services-node-sdk');
+const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
 /**
  * This sample illustrates how to provide data inputs to an HTML file before converting it to PDF. The data input is used
  * by the javascript in the HTML file to manipulate the HTML DOM, thus effectively updating the source HTML file.
@@ -25,7 +25,7 @@ const DCServicesSdk = require('@adobe/dc-services-node-sdk');
  */
 const setCustomOptions = (htmlToPDFOperation) => {
     // Define the page layout, in this case an 8 x 11.5 inch page (effectively portrait orientation).
-    const pageLayout = new DCServicesSdk.CreatePDF.options.PageLayout();
+    const pageLayout = new PDFToolsSdk.CreatePDF.options.PageLayout();
     pageLayout.setPageSize(8, 11.5);
     //Set the dataToMerge field that needs to be populated in the HTML before its conversion.
     const dataToMerge = {
@@ -33,7 +33,7 @@ const setCustomOptions = (htmlToPDFOperation) => {
         "sub_title": "Easily integrate PDF actions within your document workflows."
     };
     // Set the desired HTML-to-PDF conversion options.
-    const htmlToPdfOptions = new DCServicesSdk.CreatePDF.options.html.CreatePDFFromHtmlOptions.Builder()
+    const htmlToPdfOptions = new PDFToolsSdk.CreatePDF.options.html.CreatePDFFromHtmlOptions.Builder()
         .includesHeaderFooter(true)
         .withPageLayout(pageLayout)
         .withDataToMerge(dataToMerge)
@@ -44,17 +44,17 @@ const setCustomOptions = (htmlToPDFOperation) => {
 
 try {
     // Initial setup, create credentials instance.
-    const credentials =  DCServicesSdk.Credentials
+    const credentials =  PDFToolsSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("dc-services-sdk-credentials.json")
+        .fromFile("pdftools-api-credentials.json")
         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = DCServicesSdk.ExecutionContext.create(credentials),
-        htmlToPDFOperation = DCServicesSdk.CreatePDF.Operation.createNew();
+    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials),
+        htmlToPDFOperation = PDFToolsSdk.CreatePDF.Operation.createNew();
 
     // Set operation input from a source file.
-    const input = DCServicesSdk.FileRef.createFromLocalFile('resources/createPDFFromDynamicHtmlInput.zip');
+    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/createPDFFromDynamicHtmlInput.zip');
     htmlToPDFOperation.setInput(input);
 
     // Provide any custom configuration options for the operation.
@@ -64,8 +64,8 @@ try {
     htmlToPDFOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/createPdfFromDynamicHtmlOutput.pdf'))
         .catch(err => {
-            if(err instanceof DCServicesSdk.Error.ServiceApiError
-                || err instanceof DCServicesSdk.Error.ServiceUsageError) {
+            if(err instanceof PDFToolsSdk.Error.ServiceApiError
+                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);

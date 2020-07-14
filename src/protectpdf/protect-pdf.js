@@ -8,13 +8,12 @@
  * then your use, modification, or distribution of it requires the prior
  * written permission of Adobe.
  */
+
 const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
+
 /**
- * This sample illustrates how to perform an OCR operation on a PDF file and convert it into an searchable PDF file on
- * the basis of provided locale and SEARCHABLE_IMAGE_EXACT ocr type to keep the original image
- * (Recommended for cases requiring maximum fidelity to the original image.).
- * <p>
- * Note that OCR operation on a PDF file results in a PDF file.
+ * This sample illustrates how to convert a PDF file into a password protected PDF file.
+ * The password is used for encrypting PDF contents and will be required for viewing the PDF file.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
@@ -25,24 +24,27 @@ try {
         .fromFile("pdftools-api-credentials.json")
         .build();
 
-    //Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials),
-        ocrOperation = PDFToolsSdk.OCR.Operation.createNew();
+    // Create an ExecutionContext using credentials
+    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials);
+
+    // Build ProtectPDF options by setting a User Password and Encryption
+    // Algorithm (used for encrypting the PDF file).
+    const protectPDF = PDFToolsSdk.ProtectPDF,
+        options = new protectPDF.options.PasswordProtectOptions.Builder()
+            .setUserPassword("encryptPassword")
+            .setEncryptionAlgorithm(PDFToolsSdk.ProtectPDF.options.EncryptionAlgorithm.AES_256)
+            .build();
+
+    // Create a new operation instance.
+    const protectPDFOperation = protectPDF.Operation.createNew(options);
 
     // Set operation input from a source file.
-    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/ocrInput.pdf');
-    ocrOperation.setInput(input);
-
-    // Provide any custom configuration options for the operation.
-    const options = new PDFToolsSdk.OCR.options.OCROptions.Builder()
-        .withOcrType(PDFToolsSdk.OCR.options.OCRSupportedType.SEARCHABLE_IMAGE_EXACT)
-        .withOcrLang(PDFToolsSdk.OCR.options.OCRSupportedLocale.EN_US)
-        .build();
-    ocrOperation.setOptions(options);
+    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/protectPDFInput.pdf');
+    protectPDFOperation.setInput(input);
 
     // Execute the operation and Save the result to the specified location.
-    ocrOperation.execute(executionContext)
-        .then(result => result.saveAsFile('output/ocrWithOptionsOutput.pdf'))
+    protectPDFOperation.execute(executionContext)
+        .then(result => result.saveAsFile('output/protectPDFOutput.pdf'))
         .catch(err => {
             if(err instanceof PDFToolsSdk.Error.ServiceApiError
                 || err instanceof PDFToolsSdk.Error.ServiceUsageError) {

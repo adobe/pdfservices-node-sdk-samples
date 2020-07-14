@@ -9,19 +9,19 @@
  * written permission of Adobe.
  */
 
-const DCServicesSdk = require('@adobe/dc-services-node-sdk');
+const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
 
 /**
  * This sample illustrates how to combine specific pages of multiple PDF files into a single PDF file.
  * <p>
- * Note that the SDK supports combining upto 12 files in one operation
+ * Note that the SDK supports combining upto 20 files in one operation
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
 
 const getPageRangesForFirstFile = () => {
     // Specify which pages of the first file are to be included in the combined file.
-    const pageRangesForFirstFile = new DCServicesSdk.PageRanges();
+    const pageRangesForFirstFile = new PDFToolsSdk.PageRanges();
     // Add page 1.
     pageRangesForFirstFile.addSinglePage(1);
     // Add page 2.
@@ -33,7 +33,7 @@ const getPageRangesForFirstFile = () => {
 
 const getPageRangesForSecondFile = () => {
     // Specify which pages of the second file are to be included in the combined file.
-    const pageRangesForSecondFile = new DCServicesSdk.PageRanges();
+    const pageRangesForSecondFile = new PDFToolsSdk.PageRanges();
     // Add all pages including and after page 3.
     pageRangesForSecondFile.addAllFrom(3);
     return pageRangesForSecondFile;
@@ -41,23 +41,23 @@ const getPageRangesForSecondFile = () => {
 
 try {
     // Initial setup, create credentials instance.
-    const credentials =  DCServicesSdk.Credentials
+    const credentials =  PDFToolsSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("dc-services-sdk-credentials.json")
+        .fromFile("pdftools-api-credentials.json")
         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = DCServicesSdk.ExecutionContext.create(credentials),
-        combineFilesOperation = DCServicesSdk.CombineFiles.Operation.createNew();
+    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials),
+        combineFilesOperation = PDFToolsSdk.CombineFiles.Operation.createNew();
 
     // Create a FileRef instance from a local file.
-    const combineSource1 = DCServicesSdk.FileRef.createFromLocalFile('resources/combineFilesInput1.pdf'),
+    const combineSource1 = PDFToolsSdk.FileRef.createFromLocalFile('resources/combineFilesInput1.pdf'),
         pageRangesForFirstFile = getPageRangesForFirstFile();
     // Add the first file as input to the operation, along with its page range.
     combineFilesOperation.addInput(combineSource1, pageRangesForFirstFile);
 
     // Create a second FileRef instance using a local file.
-    const combineSource2 = DCServicesSdk.FileRef.createFromLocalFile('resources/combineFilesInput2.pdf'),
+    const combineSource2 = PDFToolsSdk.FileRef.createFromLocalFile('resources/combineFilesInput2.pdf'),
         pageRangesForSecondFile = getPageRangesForSecondFile();
     // Add the second file as input to the operation, along with its page range.
     combineFilesOperation.addInput(combineSource2, pageRangesForSecondFile);
@@ -66,8 +66,8 @@ try {
     combineFilesOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/combineFilesWithPageRangesOutput.pdf'))
         .catch(err => {
-            if(err instanceof DCServicesSdk.Error.ServiceApiError
-                || err instanceof DCServicesSdk.Error.ServiceUsageError) {
+            if(err instanceof PDFToolsSdk.Error.ServiceApiError
+                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);

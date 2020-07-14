@@ -8,7 +8,7 @@
  * then your use, modification, or distribution of it requires the prior
  * written permission of Adobe.
  */
-const DCServicesSdk = require('@adobe/dc-services-node-sdk');
+const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
 /**
  * This sample illustrates how to perform OCR operation on a PDF file and convert it into a searchable PDF file.
  * <p>
@@ -16,28 +16,25 @@ const DCServicesSdk = require('@adobe/dc-services-node-sdk');
  */
 try {
     // Initial setup, create credentials instance.
-    const credentials =  DCServicesSdk.Credentials
+    const credentials =  PDFToolsSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("dc-services-sdk-credentials.json")
+        .fromFile("pdftools-api-credentials.json")
         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = DCServicesSdk.ExecutionContext.create(credentials),
-        ocrOperation = DCServicesSdk.OCR.Operation.createNew();
+    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials),
+        ocrOperation = PDFToolsSdk.OCR.Operation.createNew();
 
     // Set operation input from a source file.
-    const input = DCServicesSdk.FileRef.createFromLocalFile(
-            'resources/ocrInput.pdf',
-            DCServicesSdk.OCR.SupportedMediaTypes.pdf
-        );
+    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/ocrInput.pdf');
     ocrOperation.setInput(input);
 
     // Execute the operation and Save the result to the specified location.
     ocrOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/ocrOutput.pdf'))
         .catch(err => {
-            if(err instanceof DCServicesSdk.Error.ServiceApiError
-                || err instanceof DCServicesSdk.Error.ServiceUsageError) {
+            if(err instanceof PDFToolsSdk.Error.ServiceApiError
+                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);

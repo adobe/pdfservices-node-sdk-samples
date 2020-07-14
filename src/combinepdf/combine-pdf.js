@@ -9,29 +9,29 @@
  * written permission of Adobe.
  */
 
-const DCServicesSdk = require('@adobe/dc-services-node-sdk');
+const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
 
 /**
  * This sample illustrates how to combine multiple PDF files into a single PDF file.
  * <p>
- * Note that the SDK supports combining upto 12 files in one operation.
+ * Note that the SDK supports combining upto 20 files in one operation.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
 try {
     // Initial setup, create credentials instance.
-    const credentials = DCServicesSdk.Credentials
+    const credentials = PDFToolsSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("dc-services-sdk-credentials.json")
+        .fromFile("pdftools-api-credentials.json")
         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = DCServicesSdk.ExecutionContext.create(credentials),
-        combineFilesOperation = DCServicesSdk.CombineFiles.Operation.createNew();
+    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials),
+        combineFilesOperation = PDFToolsSdk.CombineFiles.Operation.createNew();
 
     // Set operation input from a source file.
-    const combineSource1 = DCServicesSdk.FileRef.createFromLocalFile('resources/combineFilesInput1.pdf'),
-        combineSource2 = DCServicesSdk.FileRef.createFromLocalFile('resources/combineFilesInput2.pdf');
+    const combineSource1 = PDFToolsSdk.FileRef.createFromLocalFile('resources/combineFilesInput1.pdf'),
+        combineSource2 = PDFToolsSdk.FileRef.createFromLocalFile('resources/combineFilesInput2.pdf');
     combineFilesOperation.addInput(combineSource1);
     combineFilesOperation.addInput(combineSource2);
 
@@ -39,8 +39,8 @@ try {
     combineFilesOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/combineFilesOutput.pdf'))
         .catch(err => {
-            if (err instanceof DCServicesSdk.Error.ServiceApiError
-                || err instanceof DCServicesSdk.Error.ServiceUsageError) {
+            if (err instanceof PDFToolsSdk.Error.ServiceApiError
+                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);

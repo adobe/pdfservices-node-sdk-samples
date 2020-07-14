@@ -1,19 +1,19 @@
-# Samples for the DC Services NodeJS SDK
+# Samples for the PDF Tools Node.js SDK
 
-This sample project helps you get started with the DC services SDK.
+This sample project helps you get started with the  PDF Tools Node.js SDK.
 
 The sample JS scripts illustrate how to perform PDF-related actions (such as converting to and from the PDF format) using 
-the SDK. **Please note that the DC Services SDK supports only server side use cases.**
+the SDK. **Please note that the PDF Tools Node.js SDK supports only server side use cases.**
 
 ## Prerequisites
 The sample application has the following requirements:
-* Node JS : Version 10.13 or above. Node installation instructions can be found 
+* Node.js : Version 10.13 or above. Node installation instructions can be found 
 [here](https://nodejs.org/en/download/).
 
 
 ## Authentication Setup
 
-The credentials file and corresponding private key file for the samples is ```dc-services-sdk-credentials.json``` and ```private.key``` 
+The credentials file and corresponding private key file for the samples is ```pdftools-api-credentials.json``` and ```private.key``` 
 respectively. Before the samples can be run, replace both the files with the ones present in the downloaded zip file at 
 the end of creation of credentials via [Get Started](https://www.adobe.io/apis/documentcloud/dcsdk/gettingstarted.html?ref=getStartedWithServicesSdk) workflow.
 
@@ -23,8 +23,8 @@ know more.
 
 ## Quota Exhaustion
 
-If you receive ServiceUsageError during the Samples run, it means that trial credentials have exhausted their quota 
-of 5000 pages. Please contact [here](https://www.adobe.com/go/dcsdk_requestform) to get the paid credentials.
+If you receive ServiceUsageError during the Samples run, it means that trial credentials have exhausted their usage quota. 
+Please [contact us](https://www.adobe.com/go/pdftoolsapi_requestform) to get paid credentials.
 
 ## Build with npm
 
@@ -33,11 +33,12 @@ Run the following command to build the project:
 npm install
 ```
 
-Note that the DC Services SDK is listed as a dependency in the package.json and will be downloaded automatically.
+Note that the PDF Tools SDK is listed as a dependency in the package.json and will be downloaded automatically.
 
 ## A Note on Logging
 For logging, this SDK uses the [log4js API](https://www.npmjs.com/package/log4js) . 
-Upon running, the SDK searches for a file ```config/dc-sdk-log4js-config.json``` in the working directory, and reads the logging properties from there. If no configuration file is provided, default logging, i.e. logging INFO logs to the console is enabled. The clients can change the logging settings as per their needs.
+Upon running, the SDK searches for a file ```config/pdftools-sdk-log4js-config.json``` in the working directory, and reads the
+logging properties from there. If no configuration file is provided, default logging, i.e. logging INFO logs to the console is enabled. The clients can change the logging settings as per their needs.
 
 ## Running the samples
 
@@ -150,7 +151,7 @@ The sample script ```combine-pdf.js``` combines multiple PDF files into a single
 of the source files.
 
 ```$xslt
-node src/combine/combine-pdf.js
+node src/combinepdf/combine-pdf.js
 ```
 
 #### Combine Specific Pages of Multiple PDF Files
@@ -158,27 +159,124 @@ node src/combine/combine-pdf.js
 The sample script ```combine-pdf-with-page-ranges.js``` combines specific pages of multiple PDF files into into a single PDF file.
  
 ```$xslt
-node src/combine/combine-pdf-with-page-ranges.js
+node src/combinepdf/combine-pdf-with-page-ranges.js
 ```
 
 ### OCR PDF File
-These samples illustrates how to apply OCR(Optical Character Recognition) to a PDF file and convert it to a searchable copy of your PDF. The supported input format is application/pdf.
+These samples illustrate how to apply OCR(Optical Character Recognition) to a PDF file and convert it to a searchable copy of your PDF. The supported input format is application/pdf.
 
-#### Convert PDF File to a searchable PDF file
+#### Convert a PDF File into a Searchable PDF File
 
-The sample script ```ocr-pdf``` converts a PDF file into a searchable PDF file.
+The sample script ```ocr-pdf.js``` converts a PDF file into a searchable PDF file.
 
 ```$xslt
 node src/ocr/ocr-pdf.js
 ```
 
-#### Convert PDF file into a searchable file while keeping the original image.
+#### Convert a PDF File into a Searchable PDF File while keeping the original image
 
-The sample script ```ocr-pdf-with-options``` converts a PDF file to a searchable PDF file with maximum fidelity to the original image and default en-us locale. Refer to the documentation of ocr-options.js
+The sample script ```ocr-pdf-with-options.js``` converts a PDF file to a searchable PDF file with maximum fidelity to the original image and default en-us locale. Refer to the documentation of ocr-options.js
 to see the list of supported OCR locales and OCR types.
 
 ```$xslt
 node src/ocr/ocr-pdf-with-options.js
+```
+
+### Compress PDF File
+
+The sample illustrates how to reduce the size of a PDF file.
+
+#### Reduce PDF File Size
+
+The sample script ```compress-pdf.js``` reduces the size of a PDF file.
+
+```$xslt
+node src/compresspdf/compress-pdf.js
+```
+
+### Linearize PDF File
+
+The sample illustrates how to convert a PDF file into a Linearized (also known as "web optimized") PDF file. Such PDF files are 
+optimized for incremental access in network environments.
+
+#### Convert a PDF File into a Web Optimized File
+
+The sample script ```linearize-pdf.js``` optimizes the PDF file for a faster Web View.
+
+```$xslt
+node src/linearizepdf/linearize-pdf.js
+```
+
+### Protect PDF File
+
+The sample illustrates how to secure a PDF file with a password.
+
+#### Convert a PDF File into a Password Protected PDF File
+
+The sample script ```protect-pdf.js``` converts a PDF file into a password protected PDF file.
+
+```$xslt
+node src/protectpdf/protect-pdf.js
+```
+
+### Rotate Pages
+
+The sample illustrates how to rotate pages in a PDF file.
+
+#### Rotate Pages in PDF File
+
+The sample script ```rotate-pdf-pages.js``` rotates specific pages in a PDF file.
+
+```$xslt
+node src/rotatepages/rotate-pdf-pages.js
+```
+
+### Delete Pages
+
+The sample illustrates how to delete pages in a PDF file.
+
+#### Delete Pages from PDF File
+
+The sample script ```delete-pdf-pages.js``` removes specific pages from a PDF file.
+
+```$xslt
+node src/deletepages/delete-pdf-pages.js
+```
+
+### Reorder Pages
+
+The sample illustrates how to reorder the pages in a PDF file.
+
+#### Reorder Pages in PDF File
+
+The sample script ```reorder-pdf-pages.js``` rearranges the pages of a PDF file according to the specified order.
+
+```$xslt
+node src/reorderpages/reorder-pdf-pages.js
+```
+
+### Insert Pages
+
+The sample illustrates how to insert pages in a PDF file.
+
+#### Insert Pages into a PDF File
+
+The sample script ```insert-pdf-pages.js``` inserts pages of multiple PDF files into a base PDF file.
+
+```$xslt
+node src/insertpages/insert-pdf-pages.js
+```
+
+### Replace Pages
+
+The sample illustrates how to replace pages of a PDF file.
+
+#### Replace PDF File Pages with Multiple PDF Files
+
+The sample script ```replace-pdf-pages.js``` replaces specific pages in a PDF file with pages from multiple PDF files.
+
+```$xslt
+node src/replacepages/replace-pdf-pages.js
 ```
 
 ### Licensing
