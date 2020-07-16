@@ -8,43 +8,49 @@
  * then your use, modification, or distribution of it requires the prior
  * written permission of Adobe.
  */
+
 const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
 /**
- * This sample illustrates how to perform an OCR operation on a PDF file and convert it into an searchable PDF file on
- * the basis of provided locale and SEARCHABLE_IMAGE_EXACT ocr type to keep the original image
- * (Recommended for cases requiring maximum fidelity to the original image.).
- * <p>
- * Note that OCR operation on a PDF file results in a PDF file.
+ * This sample illustrates how to delete pages in a PDF file.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
+
+const getPageRangesForDeletion = () => {
+    // Specify pages for deletion.
+    const pageRangesForDeletion = new PDFToolsSdk.PageRanges();
+    // Add page 1.
+    pageRangesForDeletion.addSinglePage(1);
+
+    // Add pages 3 to 4.
+    pageRangesForDeletion.addPageRange(3, 4);
+    return pageRangesForDeletion;
+};
+
 try {
     // Initial setup, create credentials instance.
-    const credentials =  PDFToolsSdk.Credentials
+    const credentials = PDFToolsSdk.Credentials
         .serviceAccountCredentialsBuilder()
         .fromFile("pdftools-api-credentials.json")
         .build();
 
-    //Create an ExecutionContext using credentials and create a new operation instance.
+    // Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFToolsSdk.ExecutionContext.create(credentials),
-        ocrOperation = PDFToolsSdk.OCR.Operation.createNew();
+        deletePagesOperation = PDFToolsSdk.DeletePages.Operation.createNew();
 
     // Set operation input from a source file.
-    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/ocrInput.pdf');
-    ocrOperation.setInput(input);
+    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/deletePagesInput.pdf');
+    deletePagesOperation.setInput(input);
 
-    // Provide any custom configuration options for the operation.
-    const options = new PDFToolsSdk.OCR.options.OCROptions.Builder()
-        .withOcrType(PDFToolsSdk.OCR.options.OCRSupportedType.SEARCHABLE_IMAGE_EXACT)
-        .withOcrLang(PDFToolsSdk.OCR.options.OCRSupportedLocale.EN_US)
-        .build();
-    ocrOperation.setOptions(options);
+    // Delete pages of the document (as specified by PageRanges).
+    const pageRangesForDeletion = getPageRangesForDeletion();
+    deletePagesOperation.setPageRanges(pageRangesForDeletion);
 
     // Execute the operation and Save the result to the specified location.
-    ocrOperation.execute(executionContext)
-        .then(result => result.saveAsFile('output/ocrWithOptionsOutput.pdf'))
+    deletePagesOperation.execute(executionContext)
+        .then(result => result.saveAsFile('output/deletePagesOutput.pdf'))
         .catch(err => {
-            if(err instanceof PDFToolsSdk.Error.ServiceApiError
+            if (err instanceof PDFToolsSdk.Error.ServiceApiError
                 || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {

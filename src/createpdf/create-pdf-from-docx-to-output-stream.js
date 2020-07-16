@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const DCServicesSdk = require('@adobe/dc-services-node-sdk'),
+const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk'),
     fs = require('fs');
 
 /**
@@ -34,17 +34,17 @@ const prepareWriteStream = () => {
 
 try {
     // Initial setup, create credentials instance.
-    const credentials =  DCServicesSdk.Credentials
+    const credentials =  PDFToolsSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("dc-services-sdk-credentials.json")
+        .fromFile("pdftools-api-credentials.json")
         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = DCServicesSdk.ExecutionContext.create(credentials),
-        createPdfOperation = DCServicesSdk.CreatePDF.Operation.createNew();
+    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials),
+        createPdfOperation = PDFToolsSdk.CreatePDF.Operation.createNew();
 
     // Set operation input from a source file.
-    const input = DCServicesSdk.FileRef.createFromLocalFile('resources/createPDFInput.docx');
+    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/createPDFInput.docx');
     createPdfOperation.setInput(input);
 
     const writeStream = prepareWriteStream();
@@ -55,8 +55,8 @@ try {
     createPdfOperation.execute(executionContext)
         .then(result => result.writeToStream(writeStream))
         .catch(err => {
-            if(err instanceof DCServicesSdk.Error.ServiceApiError
-                || err instanceof DCServicesSdk.Error.ServiceUsageError) {
+            if(err instanceof PDFToolsSdk.Error.ServiceApiError
+                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);

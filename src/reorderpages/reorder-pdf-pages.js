@@ -8,41 +8,48 @@
  * then your use, modification, or distribution of it requires the prior
  * written permission of Adobe.
  */
+
 const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
+
 /**
- * This sample illustrates how to perform an OCR operation on a PDF file and convert it into an searchable PDF file on
- * the basis of provided locale and SEARCHABLE_IMAGE_EXACT ocr type to keep the original image
- * (Recommended for cases requiring maximum fidelity to the original image.).
- * <p>
- * Note that OCR operation on a PDF file results in a PDF file.
+ * This sample illustrates how to reorder the pages in a PDF file.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
+
+const getPageRangeForReorder = () => {
+    // Specify order of the pages for an output document.
+    const pageRanges = new PDFToolsSdk.PageRanges();
+
+    // Add pages 3 to 4.
+    pageRanges.addPageRange(3, 4);
+
+    // Add page 1.
+    pageRanges.addSinglePage(1);
+
+    return pageRanges;
+};
 try {
     // Initial setup, create credentials instance.
-    const credentials =  PDFToolsSdk.Credentials
+    const credentials = PDFToolsSdk.Credentials
         .serviceAccountCredentialsBuilder()
         .fromFile("pdftools-api-credentials.json")
         .build();
 
-    //Create an ExecutionContext using credentials and create a new operation instance.
+    // Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFToolsSdk.ExecutionContext.create(credentials),
-        ocrOperation = PDFToolsSdk.OCR.Operation.createNew();
+        reorderPagesOperation = PDFToolsSdk.ReorderPages.Operation.createNew();
 
-    // Set operation input from a source file.
-    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/ocrInput.pdf');
-    ocrOperation.setInput(input);
-
-    // Provide any custom configuration options for the operation.
-    const options = new PDFToolsSdk.OCR.options.OCROptions.Builder()
-        .withOcrType(PDFToolsSdk.OCR.options.OCRSupportedType.SEARCHABLE_IMAGE_EXACT)
-        .withOcrLang(PDFToolsSdk.OCR.options.OCRSupportedLocale.EN_US)
-        .build();
-    ocrOperation.setOptions(options);
+    // Set operation input from a source file, along with specifying the order of the pages for
+    // rearranging the pages in a PDF file.
+    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/reorderPagesInput.pdf');
+    const pageRanges = getPageRangeForReorder();
+    reorderPagesOperation.setInput(input);
+    reorderPagesOperation.setPagesOrder(pageRanges);
 
     // Execute the operation and Save the result to the specified location.
-    ocrOperation.execute(executionContext)
-        .then(result => result.saveAsFile('output/ocrWithOptionsOutput.pdf'))
+    reorderPagesOperation.execute(executionContext)
+        .then(result => result.saveAsFile('output/reorderPagesOutput.pdf'))
         .catch(err => {
             if(err instanceof PDFToolsSdk.Error.ServiceApiError
                 || err instanceof PDFToolsSdk.Error.ServiceUsageError) {

@@ -1,14 +1,14 @@
 {
-  "name": "dc-services-sdk-samples",
-  "version": "1.0.0",
-  "description": "DC Services Node SDK sample",
+  "name": "pdftools-node-sdk-samples",
+  "version": "1.1.0",
+  "description": "PDF Tools Node.js SDK sample",
   "author": "Adobe",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:adobe/dc-services-sdk-node-samples.git"
+    "url": "git@github.com:adobe/pdftools-node-sdk-samples.git"
   },
   "dependencies": {
-    "@adobe/dc-services-node-sdk": "1.0.0"
+    "@adobe/documentservices-pdftools-node-sdk": "1.1.0"
   }
 }
