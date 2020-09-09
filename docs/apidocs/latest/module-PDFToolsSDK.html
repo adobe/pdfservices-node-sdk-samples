@@ -1,0 +1,2718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>PDFToolsSDK - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-PDFToolsSDK.html">PDFToolsSDK</a></li></ul><h3>Classes</h3><ul><li><a href="ExecutionContext.html">ExecutionContext</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ExecutionContext.html#.create">create</a></li></ul></li><li><a href="ClientConfig.html">ClientConfig</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ClientConfig.html#.clientConfigBuilder">clientConfigBuilder</a></li></ul></li><li><a href="ClientConfigBuilder.html">ClientConfigBuilder</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ClientConfigBuilder.html#withConnectTimeout">withConnectTimeout</a></li><li data-type='method' style='display: none;'><a href="ClientConfigBuilder.html#withReadTimeout">withReadTimeout</a></li><li data-type='method' style='display: none;'><a href="ClientConfigBuilder.html#fromFile">fromFile</a></li><li data-type='method' style='display: none;'><a href="ClientConfigBuilder.html#build">build</a></li></ul></li><li><a href="FileRef.html">FileRef</a><ul class='methods'><li data-type='method' style='display: none;'><a href="FileRef.html#.createFromLocalFile">createFromLocalFile</a></li><li data-type='method' style='display: none;'><a href="FileRef.html#.createFromStream">createFromStream</a></li><li data-type='method' style='display: none;'><a href="FileRef.html#saveAsFile">saveAsFile</a></li><li data-type='method' style='display: none;'><a href="FileRef.html#writeToStream">writeToStream</a></li></ul></li><li><a href="Credentials.html">Credentials</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Credentials.html#.serviceAccountCredentialsBuilder">serviceAccountCredentialsBuilder</a></li></ul></li><li><a href="ServiceAccountCredentials.html">ServiceAccountCredentials</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ServiceAccountCredentials.html#getClientId">getClientId</a></li><li data-type='method' style='display: none;'><a href="ServiceAccountCredentials.html#getClientSecret">getClientSecret</a></li><li data-type='method' style='display: none;'><a href="ServiceAccountCredentials.html#getPrivateKey">getPrivateKey</a></li><li data-type='method' style='display: none;'><a href="ServiceAccountCredentials.html#getClaim">getClaim</a></li><li data-type='method' style='display: none;'><a href="ServiceAccountCredentials.html#getOrganizationId">getOrganizationId</a></li><li data-type='method' style='display: none;'><a href="ServiceAccountCredentials.html#getAccountId">getAccountId</a></li><li data-type='method' style='display: none;'><a href="ServiceAccountCredentials.html#getImsBaseUri">getImsBaseUri</a></li></ul></li><li><a href="ServiceAccountCredentialsBuilder.html">ServiceAccountCredentialsBuilder</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ServiceAccountCredentialsBuilder.html#withClientId">withClientId</a></li><li data-type='method' style='display: none;'><a href="ServiceAccountCredentialsBuilder.html#withClientSecret">withClientSecret</a></li><li data-type='method' style='display: none;'><a href="ServiceAccountCredentialsBuilder.html#withPrivateKey">withPrivateKey</a></li><li data-type='method' style='display: none;'><a href="ServiceAccountCredentialsBuilder.html#withOrganizationId">withOrganizationId</a></li><li data-type='method' style='display: none;'><a href="ServiceAccountCredentialsBuilder.html#withAccountId">withAccountId</a></li><li data-type='method' style='display: none;'><a href="ServiceAccountCredentialsBuilder.html#fromFile">fromFile</a></li><li data-type='method' style='display: none;'><a href="ServiceAccountCredentialsBuilder.html#build">build</a></li></ul></li><li><a href="CombineFilesOperation.html">CombineFilesOperation</a><ul class='methods'><li data-type='method' style='display: none;'><a href="CombineFilesOperation.html#.createNew">createNew</a></li><li data-type='method' style='display: none;'><a href="CombineFilesOperation.html#addInput">addInput</a></li><li data-type='method' style='display: none;'><a href="CombineFilesOperation.html#execute">execute</a></li></ul></li><li><a href="CompressPDFOperation.html">CompressPDFOperation</a><ul class='methods'><li data-type='method' style='display: none;'><a href="CompressPDFOperation.html#.createNew">createNew</a></li><li data-type='method' style='display: none;'><a href="CompressPDFOperation.html#setInput">setInput</a></li><li data-type='method' style='display: none;'><a href="CompressPDFOperation.html#execute">execute</a></li></ul></li><li><a href="CreatePDFOperation.html">CreatePDFOperation</a><ul class='methods'><li data-type='method' style='display: none;'><a href="CreatePDFOperation.html#.createNew">createNew</a></li><li data-type='method' style='display: none;'><a href="CreatePDFOperation.html#setInput">setInput</a></li><li data-type='method' style='display: none;'><a href="CreatePDFOperation.html#setOptions">setOptions</a></li><li data-type='method' style='display: none;'><a href="CreatePDFOperation.html#execute">execute</a></li></ul></li><li><a href="DeletePagesOperation.html">DeletePagesOperation</a><ul class='methods'><li data-type='method' style='display: none;'><a href="DeletePagesOperation.html#.createNew">createNew</a></li><li data-type='method' style='display: none;'><a href="DeletePagesOperation.html#setInput">setInput</a></li><li data-type='method' style='display: none;'><a href="DeletePagesOperation.html#setPageRanges">setPageRanges</a></li><li data-type='method' style='display: none;'><a href="DeletePagesOperation.html#execute">execute</a></li></ul></li><li><a href="ExportPDFOperation.html">ExportPDFOperation</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ExportPDFOperation.html#.createNew">createNew</a></li><li data-type='method' style='display: none;'><a href="ExportPDFOperation.html#setInput">setInput</a></li><li data-type='method' style='display: none;'><a href="ExportPDFOperation.html#execute">execute</a></li></ul></li><li><a href="InsertPagesOperation.html">InsertPagesOperation</a><ul class='methods'><li data-type='method' style='display: none;'><a href="InsertPagesOperation.html#.createNew">createNew</a></li><li data-type='method' style='display: none;'><a href="InsertPagesOperation.html#setBaseInput">setBaseInput</a></li><li data-type='method' style='display: none;'><a href="InsertPagesOperation.html#addPagesToInsertAt">addPagesToInsertAt</a></li><li data-type='method' style='display: none;'><a href="InsertPagesOperation.html#execute">execute</a></li></ul></li><li><a href="LinearizePDFOperation.html">LinearizePDFOperation</a><ul class='methods'><li data-type='method' style='display: none;'><a href="LinearizePDFOperation.html#.createNew">createNew</a></li><li data-type='method' style='display: none;'><a href="LinearizePDFOperation.html#setInput">setInput</a></li><li data-type='method' style='display: none;'><a href="LinearizePDFOperation.html#execute">execute</a></li></ul></li><li><a href="OCROperation.html">OCROperation</a><ul class='methods'><li data-type='method' style='display: none;'><a href="OCROperation.html#.createNew">createNew</a></li><li data-type='method' style='display: none;'><a href="OCROperation.html#setInput">setInput</a></li><li data-type='method' style='display: none;'><a href="OCROperation.html#setOptions">setOptions</a></li><li data-type='method' style='display: none;'><a href="OCROperation.html#execute">execute</a></li></ul></li><li><a href="CreatePDFFromHtmlOptions.html">CreatePDFFromHtmlOptions</a><ul class='methods'><li data-type='method' style='display: none;'><a href="CreatePDFFromHtmlOptions.html#.Builder">Builder</a></li></ul></li><li><a href="CreatePDFFromHtmlOptionsBuilder.html">CreatePDFFromHtmlOptionsBuilder</a><ul class='methods'><li data-type='method' style='display: none;'><a href="CreatePDFFromHtmlOptionsBuilder.html#includesHeaderFooter">includesHeaderFooter</a></li><li data-type='method' style='display: none;'><a href="CreatePDFFromHtmlOptionsBuilder.html#withPageLayout">withPageLayout</a></li><li data-type='method' style='display: none;'><a href="CreatePDFFromHtmlOptionsBuilder.html#withDataToMerge">withDataToMerge</a></li><li data-type='method' style='display: none;'><a href="CreatePDFFromHtmlOptionsBuilder.html#build">build</a></li></ul></li><li><a href="PageLayout.html">PageLayout</a><ul class='methods'><li data-type='method' style='display: none;'><a href="PageLayout.html#setPageSize">setPageSize</a></li></ul></li><li><a href="OCROptions.html">OCROptions</a><ul class='methods'><li data-type='method' style='display: none;'><a href="OCROptions.html#.Builder">Builder</a></li></ul></li><li><a href="OCROptionsBuilder.html">OCROptionsBuilder</a><ul class='methods'><li data-type='method' style='display: none;'><a href="OCROptionsBuilder.html#withOcrType">withOcrType</a></li><li data-type='method' style='display: none;'><a href="OCROptionsBuilder.html#withOcrLang">withOcrLang</a></li><li data-type='method' style='display: none;'><a href="OCROptionsBuilder.html#build">build</a></li></ul></li><li><a href="PageRanges.html">PageRanges</a><ul class='methods'><li data-type='method' style='display: none;'><a href="PageRanges.html#addSinglePage">addSinglePage</a></li><li data-type='method' style='display: none;'><a href="PageRanges.html#addPageRange">addPageRange</a></li><li data-type='method' style='display: none;'><a href="PageRanges.html#addAllFrom">addAllFrom</a></li><li data-type='method' style='display: none;'><a href="PageRanges.html#addAll">addAll</a></li></ul></li><li><a href="PasswordProtectOptions.html">PasswordProtectOptions</a><ul class='methods'><li data-type='method' style='display: none;'><a href="PasswordProtectOptions.html#.Builder">Builder</a></li></ul></li><li><a href="PasswordProtectOptionsBuilder.html">PasswordProtectOptionsBuilder</a><ul class='methods'><li data-type='method' style='display: none;'><a href="PasswordProtectOptionsBuilder.html#setUserPassword">setUserPassword</a></li><li data-type='method' style='display: none;'><a href="PasswordProtectOptionsBuilder.html#setEncryptionAlgorithm">setEncryptionAlgorithm</a></li><li data-type='method' style='display: none;'><a href="PasswordProtectOptionsBuilder.html#build">build</a></li></ul></li><li><a href="ProtectPDFOperation.html">ProtectPDFOperation</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ProtectPDFOperation.html#.createNew">createNew</a></li><li data-type='method' style='display: none;'><a href="ProtectPDFOperation.html#setInput">setInput</a></li><li data-type='method' style='display: none;'><a href="ProtectPDFOperation.html#execute">execute</a></li></ul></li><li><a href="ReorderPagesOperation.html">ReorderPagesOperation</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ReorderPagesOperation.html#.createNew">createNew</a></li><li data-type='method' style='display: none;'><a href="ReorderPagesOperation.html#setInput">setInput</a></li><li data-type='method' style='display: none;'><a href="ReorderPagesOperation.html#setPagesOrder">setPagesOrder</a></li><li data-type='method' style='display: none;'><a href="ReorderPagesOperation.html#execute">execute</a></li></ul></li><li><a href="ReplacePagesOperation.html">ReplacePagesOperation</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ReplacePagesOperation.html#.createNew">createNew</a></li><li data-type='method' style='display: none;'><a href="ReplacePagesOperation.html#setBaseInput">setBaseInput</a></li><li data-type='method' style='display: none;'><a href="ReplacePagesOperation.html#addPagesForReplace">addPagesForReplace</a></li><li data-type='method' style='display: none;'><a href="ReplacePagesOperation.html#execute">execute</a></li></ul></li><li><a href="RotatePagesOperation.html">RotatePagesOperation</a><ul class='methods'><li data-type='method' style='display: none;'><a href="RotatePagesOperation.html#.createNew">createNew</a></li><li data-type='method' style='display: none;'><a href="RotatePagesOperation.html#setInput">setInput</a></li><li data-type='method' style='display: none;'><a href="RotatePagesOperation.html#setAngleToRotatePagesBy">setAngleToRotatePagesBy</a></li><li data-type='method' style='display: none;'><a href="RotatePagesOperation.html#execute">execute</a></li></ul></li><li><a href="ServiceApiError.html">ServiceApiError</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ServiceApiError.html#getStatusCode">getStatusCode</a></li><li data-type='method' style='display: none;'><a href="ServiceApiError.html#getMessage">getMessage</a></li><li data-type='method' style='display: none;'><a href="ServiceApiError.html#getRequestTrackingId">getRequestTrackingId</a></li><li data-type='method' style='display: none;'><a href="ServiceApiError.html#toString">toString</a></li></ul></li><li><a href="ServiceUsageError.html">ServiceUsageError</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ServiceUsageError.html#getStatusCode">getStatusCode</a></li><li data-type='method' style='display: none;'><a href="ServiceUsageError.html#getMessage">getMessage</a></li><li data-type='method' style='display: none;'><a href="ServiceUsageError.html#getRequestTrackingId">getRequestTrackingId</a></li><li data-type='method' style='display: none;'><a href="ServiceUsageError.html#toString">toString</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">PDFToolsSDK</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+                <div class="description"><p>This module is the single entry point for clients to interact with the  PDF Tools SDK. This is the only file that
+a 3rd party app should require. All the necessary classes and modules required to
+perform operations via the SDK are exposed through this module.</p></div>
+            
+
+            
+                
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="Credentials"><span class="type-signature"></span>Credentials<span class="type-signature"> :<a href="Credentials.html">Credentials</a></span></h4>
+
+
+<p class="summary"><p>Reference to the <a href="Credentials.html">Credentials</a> class.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="Credentials.html">Credentials</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="ClientConfig"><span class="type-signature"></span>ClientConfig<span class="type-signature"> :<a href="ClientConfig.html">ClientConfig</a></span></h4>
+
+
+<p class="summary"><p>Reference to the <a href="ClientConfig.html">ClientConfig</a> class.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="ClientConfig.html">ClientConfig</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="ExecutionContext"><span class="type-signature"></span>ExecutionContext<span class="type-signature"> :<a href="ExecutionContext.html">ExecutionContext</a></span></h4>
+
+
+<p class="summary"><p>Reference to the <a href="ExecutionContext.html">ExecutionContext</a> class.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="ExecutionContext.html">ExecutionContext</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="FileRef"><span class="type-signature"></span>FileRef<span class="type-signature"> :<a href="FileRef.html">FileRef</a></span></h4>
+
+
+<p class="summary"><p>Reference to the <a href="FileRef.html">FileRef</a> class.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="FileRef.html">FileRef</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="CreatePDF"><span class="type-signature"></span>CreatePDF<span class="type-signature"> :Object</span></h4>
+
+
+<p class="summary"><p>Object containing references to classes required for creating a PDF.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Operation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="CreatePDFOperation.html">CreatePDFOperation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the operation class responsible for creating a PDF</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SupportedMediaTypes</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="CreatePDFOperation.html#.SupportedMediaTypes">CreatePDFOperation.SupportedMediaTypes</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>List of supported media types which can
+be converted to a PDF. Deprecated since version 1.1.0</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SupportedSourceFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="CreatePDFOperation.html#.SupportedSourceFormat">CreatePDFOperation.SupportedSourceFormat</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>List of supported file formats which can
+be converted to a PDF</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Contains references to configurable options of the operation</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>html</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Contains references to html file format specific configurable options</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>CreatePDFFromHtmlOptions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="CreatePDFFromHtmlOptions.html">CreatePDFFromHtmlOptions</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the configurable
+options class for converting an HTML web page/archive to PDF.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="ExportPDF"><span class="type-signature"></span>ExportPDF<span class="type-signature"> :Object</span></h4>
+
+
+<p class="summary"><p>Object containing references to classes required for exporting a PDF file.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Operation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ExportPDFOperation.html">ExportPDFOperation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the operation class responsible for exporting a PDF file</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SupportedTargetFormats</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ExportPDFOperation.html#.SupportedExportFormats">ExportPDFOperation.SupportedExportFormats</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Supported Target Formats to
+which a PDF file can be exported</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SupportedSourceFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ExportPDFOperation.html#.SupportedSourceFormat">ExportPDFOperation.SupportedSourceFormat</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>List of supported file formats which
+can be exported to other file formats</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="CombineFiles"><span class="type-signature"></span>CombineFiles<span class="type-signature"> :Object</span></h4>
+
+
+<p class="summary"><p>Object containing references to classes required for combining multiple PDF files.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Operation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="CombineFilesOperation.html">CombineFilesOperation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the operation class responsible for combining
+multiple PDF files</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SupportedSourceFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="CombineFilesOperation.html#.SupportedSourceFormat">CombineFilesOperation.SupportedSourceFormat</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>List of supported file formats which
+can be combined</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="PageRanges"><span class="type-signature"></span>PageRanges<span class="type-signature"> :<a href="PageRanges.html">PageRanges</a></span></h4>
+
+
+<p class="summary"><p>Reference to <a href="PageRanges.html">PageRanges</a> class.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="PageRanges.html">PageRanges</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="OCR"><span class="type-signature"></span>OCR<span class="type-signature"> :Object</span></h4>
+
+
+<p class="summary"><p>Object containing references to classes required to perform OCR (Optical Character Recognition)
+operation on a PDF file.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Operation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="OCROperation.html">OCROperation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the operation class responsible to perform
+OCR (Optical Character Recognition) to convert a PDF file into a searchable PDF file</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SupportedSourceFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="OCROperation.html#.SupportedSourceFormat">OCROperation.SupportedSourceFormat</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>List of supported file formats on which
+OCR can be performed</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>OCROptions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="OCROptions.html">OCROptions</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the <a href="OCROptions.html">OCROptions</a> class which provides parameters for
+converting a PDF to a searchable PDF using <a href="OCROperation.html">OCROperation</a>.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>OCRSupportedLocales</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="OCROptions.html#.OCRSupportedLocale">OCROptions.OCRSupportedLocale</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Supported locales for <a href="OCROperation.html">OCROperation</a></p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>OCRSupportedType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="OCROptions.html#.OCRSupportedType">OCROptions.OCRSupportedType</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Supported OCR types for <a href="OCROperation.html">OCROperation</a></p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="CompressPDF"><span class="type-signature"></span>CompressPDF<span class="type-signature"> :Object</span></h4>
+
+
+<p class="summary"><p>Object containing references to classes required to compress the PDF file.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Operation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="CompressPDFOperation.html">CompressPDFOperation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the operation class responsible to reduce the PDF file.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SupportedSourceFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="CompressPDFOperation.html#.SupportedSourceFormat">CompressPDFOperation.SupportedSourceFormat</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>List of supported file format
+which can be compressed</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="LinearizePDF"><span class="type-signature"></span>LinearizePDF<span class="type-signature"> :Object</span></h4>
+
+
+<p class="summary"><p>Object containing references to classes required to optimise the PDF for Fast Web View.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Operation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="LinearizePDFOperation.html">LinearizePDFOperation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the operation class responsible to linearize
+the input PDF file.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SupportedSourceFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="LinearizePDFOperation.html#.SupportedSourceFormat">LinearizePDFOperation.SupportedSourceFormat</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>List of supported file formats
+which can be linearized for fast Web View</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="ProtectPDF"><span class="type-signature"></span>ProtectPDF<span class="type-signature"> :Object</span></h4>
+
+
+<p class="summary"><p>Object containing references to classes required to protect a PDF file with permissions.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Operation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ProtectPDFOperation.html">ProtectPDFOperation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the operation class responsible to protect a PDF
+file.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SupportedSourceFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ProtectPDFOperation.html#.SupportedSourceFormat">ProtectPDFOperation.SupportedSourceFormat</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>List of supported file formats
+which can be protected with permissions</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Contains references to configurable options of the operation</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>PasswordProtectOptions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PasswordProtectOptions.html">PasswordProtectOptions</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the configurable options class
+which specifies the parameters required to protect a PDF file with permissions.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="RotatePages"><span class="type-signature"></span>RotatePages<span class="type-signature"> :Object</span></h4>
+
+
+<p class="summary"><p>Object containing references to classes required to rotate specific pages in a PDF file.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Operation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="RotatePagesOperation.html">RotatePagesOperation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the operation class responsible for rotating
+multiple pages in a PDF file</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SupportedSourceFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="RotatePagesOperation.html#.SupportedSourceFormat">RotatePagesOperation.SupportedSourceFormat</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>List of supported file formats
+for Rotate Pages Operation</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Angle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="RotatePagesOperation.html#.Angle">RotatePagesOperation.Angle</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Angle for rotation for <a href="RotatePagesOperation.html">RotatePagesOperation</a></p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="DeletePages"><span class="type-signature"></span>DeletePages<span class="type-signature"> :Object</span></h4>
+
+
+<p class="summary"><p>Object containing references to classes required for deleting a range, subset of pages in a PDF file.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Operation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="DeletePagesOperation.html">DeletePagesOperation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the operation class responsible for deleting
+multiple pages in a PDF file</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SupportedSourceFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="DeletePagesOperation.html#.SupportedSourceFormat">DeletePagesOperation.SupportedSourceFormat</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>List of supported file formats
+for Delete Pages Operation</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="ReorderPages"><span class="type-signature"></span>ReorderPages<span class="type-signature"> :Object</span></h4>
+
+
+<p class="summary"><p>Object containing references to classes required for reordering of pages in a PDF file.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Operation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ReorderPagesOperation.html">ReorderPagesOperation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the operation class responsible for reordering
+pages in a PDF file</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SupportedSourceFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ReorderPagesOperation.html#.SupportedSourceFormat">ReorderPagesOperation.SupportedSourceFormat</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>List of supported file formats
+for Reorder Pages Operation</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="InsertPages"><span class="type-signature"></span>InsertPages<span class="type-signature"> :Object</span></h4>
+
+
+<p class="summary"><p>Object containing references to classes required for inserting specific pages of multiple PDF files
+into a single PDF file.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Operation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="InsertPagesOperation.html">InsertPagesOperation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the operation class responsible for insertion of
+specific pages of multiple PDF files into a single PDF file</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SupportedSourceFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="InsertPagesOperation.html#.SupportedSourceFormat">InsertPagesOperation.SupportedSourceFormat</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>List of supported file formats
+for Insert Pages Operation</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="ReplacePages"><span class="type-signature"></span>ReplacePages<span class="type-signature"> :Object</span></h4>
+
+
+<p class="summary"><p>Object containing references to classes required for replacement of specific pages in a PDF file
+with pages from multiple PDF files.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Operation</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ReplacePagesOperation.html">ReplacePagesOperation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the operation class responsible for replacing
+specific pages of a PDF file with pages from multiple PDF files</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>SupportedSourceFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ReplacePagesOperation.html#.SupportedSourceFormat">ReplacePagesOperation.SupportedSourceFormat</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>List of supported file formats
+for Replace Pages Operation</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="Error"><span class="type-signature"></span>Error<span class="type-signature"> :Object</span></h4>
+
+
+<p class="summary"><p>Object containing references to error classes of PDFToolsSDK.</p></p>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ServiceApiError</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ServiceApiError.html">ServiceApiError</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the ServiceApiError which represents the category
+of errors which are thrown when an underlying service API call results in an error.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ServiceUsageError</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="ServiceUsageError.html">ServiceUsageError</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reference to the ServiceApiError which represents the
+category of errors which are thrown when either service usage limit has been reached or credentials quota
+has been exhausted.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+    <link type="text/css" rel="stylesheet" href="custom.css">
+    
+</body>
+</html>
