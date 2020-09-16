@@ -163,7 +163,8 @@ node src/combinepdf/combine-pdf-with-page-ranges.js
 ```
 
 ### OCR PDF File
-These samples illustrate how to apply OCR(Optical Character Recognition) to a PDF file and convert it to a searchable copy of your PDF. The supported input format is application/pdf.
+These samples illustrate how to apply OCR(Optical Character Recognition) to a PDF file and convert it to a searchable copy of your PDF. 
+The supported input format is application/pdf.
 
 #### Convert a PDF File into a Searchable PDF File
 
@@ -209,7 +210,7 @@ node src/linearizepdf/linearize-pdf.js
 
 ### Protect PDF File
 
-The sample illustrates how to secure a PDF file with a password.
+These samples illustrate how to secure a PDF file with a password.
 
 #### Convert a PDF File into a Password Protected PDF File
 
@@ -217,6 +218,26 @@ The sample script ```protect-pdf.js``` converts a PDF file into a password prote
 
 ```$xslt
 node src/protectpdf/protect-pdf.js
+```
+
+#### Protect a PDF File with an Owner Password and Permissions
+
+The sample script ```protect-pdf-with-owner-password.js``` secures an input PDF file with owner password and allows certain access permissions such as copying and editing the contents, and printing of the document at low resolution.
+
+```$xslt
+node src/protectpdf/protect-pdf-with-owner-password.js
+```
+
+### Remove Protection
+
+The sample illustrates how to remove a password security from a PDF document.
+
+#### Remove Protection from a PDF File
+
+The sample script ```remove-protection.js``` removes a password security from a secured PDF document.
+
+```$xslt
+node src/removeprotection/remove-protection.js
 ```
 
 ### Rotate Pages
@@ -277,6 +298,37 @@ The sample script ```replace-pdf-pages.js``` replaces specific pages in a PDF fi
 
 ```$xslt
 node src/replacepages/replace-pdf-pages.js
+```
+
+### Split PDF File
+
+These samples illustrate how to split PDF file into multiple PDF files.
+
+#### Split PDF By Number of Pages
+
+The sample script ```split-pdf-by-number-of-pages.js``` splits input PDF into multiple PDF files on the basis of the maximum number
+of pages each of the output files can have.
+
+```$xslt
+node src/splitpdf/split-pdf-by-number-of-pages.js
+```
+
+#### Split PDF Into Number of PDF Files
+
+The sample script ```split-pdf-into-number-of-files.js``` splits input PDF into multiple PDF files on the basis of the number
+of documents.
+
+```$xslt
+node src/splitpdf/split-pdf-into-number-of-files.js
+```
+
+#### Split PDF By Page Ranges
+
+The sample script ```split-pdf-by-page-ranges.js``` splits input PDF into multiple PDF files on the basis of page ranges.
+Each page range corresponds to a single output file having the pages specified in the page range.
+
+```$xslt
+node src/splitpdf/split-pdf-by-page-ranges.js
 ```
 
 ### Licensing
