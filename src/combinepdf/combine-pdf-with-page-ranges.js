@@ -51,13 +51,13 @@ try {
         combineFilesOperation = PDFToolsSdk.CombineFiles.Operation.createNew();
 
     // Create a FileRef instance from a local file.
-    const combineSource1 = PDFToolsSdk.FileRef.createFromLocalFile('resources/combineFilesInput1.pdf'),
+    const combineSource1 = PDFToolsSdk.FileRef.createFromLocalFile('resources/combineFileWithPageRangeInput1.pdf'),
         pageRangesForFirstFile = getPageRangesForFirstFile();
     // Add the first file as input to the operation, along with its page range.
     combineFilesOperation.addInput(combineSource1, pageRangesForFirstFile);
 
     // Create a second FileRef instance using a local file.
-    const combineSource2 = PDFToolsSdk.FileRef.createFromLocalFile('resources/combineFilesInput2.pdf'),
+    const combineSource2 = PDFToolsSdk.FileRef.createFromLocalFile('resources/combineFileWithPageRangeInput2.pdf'),
         pageRangesForSecondFile = getPageRangesForSecondFile();
     // Add the second file as input to the operation, along with its page range.
     combineFilesOperation.addInput(combineSource2, pageRangesForSecondFile);

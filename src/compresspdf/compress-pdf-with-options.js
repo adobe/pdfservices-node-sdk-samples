@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Adobe
+ * Copyright 2021 Adobe
  * All Rights Reserved.
  *
  * NOTICE: Adobe permits you to use, modify, and distribute this file in
@@ -12,42 +12,36 @@
 const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
 
 /**
- * This sample illustrates how to split input PDF into multiple PDF files on the basis of the maximum number
- * of pages each of the output files can have.
+ * This sample illustrates how to compress PDF by reducing the size of the PDF file
+ * on the basis of provided compression level.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
 try {
     // Initial setup, create credentials instance.
-    const credentials = PDFToolsSdk.Credentials
+    const credentials =  PDFToolsSdk.Credentials
         .serviceAccountCredentialsBuilder()
         .fromFile("pdftools-api-credentials.json")
         .build();
 
-    // Create an ExecutionContext using credentials
-    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials);
+    // Create an ExecutionContext using credentials and create a new operation instance.
+    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials),
+        compressPDF = PDFToolsSdk.CompressPDF,
+        compressPDFOperation = compressPDF.Operation.createNew();
 
-    // Create a new operation instance.
-    const splitPDFOperation = PDFToolsSdk.SplitPDF.Operation.createNew(),
-        input = PDFToolsSdk.FileRef.createFromLocalFile(
-            'resources/splitPDFInput.pdf',
-            PDFToolsSdk.SplitPDF.SupportedSourceFormat.pdf
-        );
     // Set operation input from a source file.
-    splitPDFOperation.setInput(input);
+    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/compressPDFInput.pdf');
+    compressPDFOperation.setInput(input);
 
-    // Set the maximum number of pages each of the output files can have.
-    splitPDFOperation.setPageCount(2);
+    // Provide any custom configuration options for the operation.
+    const options = new compressPDF.options.CompressPDFOptions.Builder()
+        .withCompressionLevel(PDFToolsSdk.CompressPDF.options.CompressionLevel.LOW)
+        .build();
+    compressPDFOperation.setOptions(options);
 
     // Execute the operation and Save the result to the specified location.
-    splitPDFOperation.execute(executionContext)
-        .then(result => {
-            let saveFilesPromises = [];
-            for(let i = 0; i < result.length; i++){
-                saveFilesPromises.push(result[i].saveAsFile(`output/splitPDFByNumberOfPagesOutput_${i}.pdf`));
-            }
-            return Promise.all(saveFilesPromises);
-        })
+    compressPDFOperation.execute(executionContext)
+        .then(result => result.saveAsFile('output/compressPDFWithOptionsOutput.pdf'))
         .catch(err => {
             if(err instanceof PDFToolsSdk.Error.ServiceApiError
                 || err instanceof PDFToolsSdk.Error.ServiceUsageError) {

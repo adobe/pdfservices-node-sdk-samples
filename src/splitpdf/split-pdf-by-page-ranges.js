@@ -57,7 +57,7 @@ try {
         .then(result => {
             let saveFilesPromises = [];
             for(let i = 0; i < result.length; i++){
-                saveFilesPromises.push(result[i].saveAsFile(`output/SplitPDFByPageRangesOutput_${i}.pdf`));
+                saveFilesPromises.push(result[i].saveAsFile(`output/splitPDFByPageRangesOutput_${i}.pdf`));
             }
             return Promise.all(saveFilesPromises);
         })
