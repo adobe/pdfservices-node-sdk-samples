@@ -1,9 +1,9 @@
-# Samples for the PDF Tools Node.js SDK
+# Samples for the PDF Services Node.js SDK
 
-This sample project helps you get started with the  PDF Tools Node.js SDK.
+This sample project helps you get started with the  PDF Services Node.js SDK.
 
 The sample JS scripts illustrate how to perform PDF-related actions (such as converting to and from the PDF format) using 
-the SDK. **Please note that the PDF Tools Node.js SDK supports only server side use cases.**
+the SDK. **Please note that the PDF Services Node.js SDK supports only server side use cases.**
 
 ## Prerequisites
 The sample application has the following requirements:
@@ -13,7 +13,7 @@ The sample application has the following requirements:
 
 ## Authentication Setup
 
-The credentials file and corresponding private key file for the samples is ```pdftools-api-credentials.json``` and ```private.key``` 
+The credentials file and corresponding private key file for the samples is ```pdfservices-api-credentials.json``` and ```private.key``` 
 respectively. Before the samples can be run, replace both the files with the ones present in the downloaded zip file at 
 the end of creation of credentials via [Get Started](https://www.adobe.io/apis/documentcloud/dcsdk/gettingstarted.html?ref=getStartedWithServicesSdk) workflow.
 
@@ -33,11 +33,11 @@ Run the following command to build the project:
 npm install
 ```
 
-Note that the PDF Tools SDK is listed as a dependency in the package.json and will be downloaded automatically.
+Note that the PDF Services SDK is listed as a dependency in the package.json and will be downloaded automatically.
 
 ## A Note on Logging
 For logging, this SDK uses the [log4js API](https://www.npmjs.com/package/log4js) . 
-Upon running, the SDK searches for a file ```config/pdftools-sdk-log4js-config.json``` in the working directory, and reads the
+Upon running, the SDK searches for a file ```config/pdfservices-sdk-log4js-config.json``` in the working directory, and reads the
 logging properties from there. If no configuration file is provided, default logging, i.e. logging INFO logs to the console is enabled. The clients can change the logging settings as per their needs.
 
 ## Running the samples

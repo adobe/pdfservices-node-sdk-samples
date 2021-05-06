@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
+const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 
 /**
  * This sample illustrates how to convert a PDF file into a password protected PDF file.
@@ -19,35 +19,35 @@ const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
  */
 try {
     // Initial setup, create credentials instance.
-    const credentials = PDFToolsSdk.Credentials
+    const credentials = PDFServicesSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("pdftools-api-credentials.json")
+        .fromFile("pdfservices-api-credentials.json")
         .build();
 
     // Create an ExecutionContext using credentials
-    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials);
+    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials);
 
     // Build ProtectPDF options by setting a User Password and Encryption
     // Algorithm (used for encrypting the PDF file).
-    const protectPDF = PDFToolsSdk.ProtectPDF,
+    const protectPDF = PDFServicesSdk.ProtectPDF,
         options = new protectPDF.options.PasswordProtectOptions.Builder()
             .setUserPassword("password")
-            .setEncryptionAlgorithm(PDFToolsSdk.ProtectPDF.options.EncryptionAlgorithm.AES_256)
+            .setEncryptionAlgorithm(PDFServicesSdk.ProtectPDF.options.EncryptionAlgorithm.AES_256)
             .build();
 
     // Create a new operation instance.
     const protectPDFOperation = protectPDF.Operation.createNew(options);
 
     // Set operation input from a source file.
-    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/protectPDFInput.pdf');
+    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/protectPDFInput.pdf');
     protectPDFOperation.setInput(input);
 
     // Execute the operation and Save the result to the specified location.
     protectPDFOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/protectPDFOutput.pdf'))
         .catch(err => {
-            if(err instanceof PDFToolsSdk.Error.ServiceApiError
-                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
+            if(err instanceof PDFServicesSdk.Error.ServiceApiError
+                || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);

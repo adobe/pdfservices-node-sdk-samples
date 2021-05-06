@@ -14,7 +14,7 @@
 			"appenders": [
 				"consoleAppender"
             ],
-            "_comment": "Change the logging levels as per need. info is recommended for documentservices-pdftools-node-sdk",
+            "_comment": "Change the logging levels as per need. info is recommended for pdfservices-node-sdk",
 			"level": "info"
 		}
 	}

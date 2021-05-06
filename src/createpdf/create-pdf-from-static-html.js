@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
+const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 /**
  * This sample illustrates how to convert an HTML file to PDF. The HTML file and its associated dependencies must be
  * in a single ZIP file.
@@ -24,11 +24,11 @@ const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
  */
 const setCustomOptions = (htmlToPDFOperation) => {
     // Define the page layout, in this case an 8 x 11.5 inch page (effectively portrait orientation).
-    const pageLayout = new PDFToolsSdk.CreatePDF.options.PageLayout();
+    const pageLayout = new PDFServicesSdk.CreatePDF.options.html.PageLayout();
     pageLayout.setPageSize(8, 11.5);
 
     // Set the desired HTML-to-PDF conversion options.
-    const htmlToPdfOptions = new PDFToolsSdk.CreatePDF.options.html.CreatePDFFromHtmlOptions.Builder()
+    const htmlToPdfOptions = new PDFServicesSdk.CreatePDF.options.html.CreatePDFFromHtmlOptions.Builder()
         .includesHeaderFooter(true)
         .withPageLayout(pageLayout)
         .build();
@@ -38,17 +38,17 @@ const setCustomOptions = (htmlToPDFOperation) => {
 
 try {
     // Initial setup, create credentials instance.
-    const credentials =  PDFToolsSdk.Credentials
+    const credentials =  PDFServicesSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("pdftools-api-credentials.json")
+        .fromFile("pdfservices-api-credentials.json")
         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials),
-        htmlToPDFOperation = PDFToolsSdk.CreatePDF.Operation.createNew();
+    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
+        htmlToPDFOperation = PDFServicesSdk.CreatePDF.Operation.createNew();
 
     // Set operation input from a source file.
-    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/createPDFFromStaticHtmlInput.zip');
+    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/createPDFFromStaticHtmlInput.zip');
     htmlToPDFOperation.setInput(input);
 
     // Provide any custom configuration options for the operation.
@@ -58,8 +58,8 @@ try {
     htmlToPDFOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/createPdfFromStaticHtmlOutput.pdf'))
         .catch(err => {
-            if(err instanceof PDFToolsSdk.Error.ServiceApiError
-                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
+            if(err instanceof PDFServicesSdk.Error.ServiceApiError
+                || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);

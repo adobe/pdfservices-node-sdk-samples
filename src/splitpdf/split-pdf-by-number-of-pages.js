@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
+const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 
 /**
  * This sample illustrates how to split input PDF into multiple PDF files on the basis of the maximum number
@@ -19,19 +19,19 @@ const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
  */
 try {
     // Initial setup, create credentials instance.
-    const credentials = PDFToolsSdk.Credentials
+    const credentials = PDFServicesSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("pdftools-api-credentials.json")
+        .fromFile("pdfservices-api-credentials.json")
         .build();
 
     // Create an ExecutionContext using credentials
-    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials);
+    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials);
 
     // Create a new operation instance.
-    const splitPDFOperation = PDFToolsSdk.SplitPDF.Operation.createNew(),
-        input = PDFToolsSdk.FileRef.createFromLocalFile(
+    const splitPDFOperation = PDFServicesSdk.SplitPDF.Operation.createNew(),
+        input = PDFServicesSdk.FileRef.createFromLocalFile(
             'resources/splitPDFInput.pdf',
-            PDFToolsSdk.SplitPDF.SupportedSourceFormat.pdf
+            PDFServicesSdk.SplitPDF.SupportedSourceFormat.pdf
         );
     // Set operation input from a source file.
     splitPDFOperation.setInput(input);
@@ -49,8 +49,8 @@ try {
             return Promise.all(saveFilesPromises);
         })
         .catch(err => {
-            if(err instanceof PDFToolsSdk.Error.ServiceApiError
-                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
+            if(err instanceof PDFServicesSdk.Error.ServiceApiError
+                || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);

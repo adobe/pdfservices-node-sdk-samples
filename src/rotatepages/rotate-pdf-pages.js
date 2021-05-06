@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
+const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 
 /**
  * This sample illustrates how to rotate pages in a PDF file.
@@ -19,7 +19,7 @@ const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
 
 const getFirstPageRangeForRotation = () => {
     // Specify pages for rotation.
-    const firstPageRange = new PDFToolsSdk.PageRanges();
+    const firstPageRange = new PDFServicesSdk.PageRanges();
     // Add page 1.
     firstPageRange.addSinglePage(1);
 
@@ -31,7 +31,7 @@ const getFirstPageRangeForRotation = () => {
 
 const getSecondPageRangeForRotation = () => {
     // Specify pages for rotation.
-    const secondPageRange = new PDFToolsSdk.PageRanges();
+    const secondPageRange = new PDFServicesSdk.PageRanges();
     // Add page 2.
     secondPageRange.addSinglePage(2);
 
@@ -40,35 +40,35 @@ const getSecondPageRangeForRotation = () => {
 
 try {
     // Initial setup, create credentials instance.
-    const credentials = PDFToolsSdk.Credentials
+    const credentials = PDFServicesSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("pdftools-api-credentials.json")
+        .fromFile("pdfservices-api-credentials.json")
         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials),
-        rotatePagesOperation = PDFToolsSdk.RotatePages.Operation.createNew();
+    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
+        rotatePagesOperation = PDFServicesSdk.RotatePages.Operation.createNew();
 
     // Set operation input from a source file.
-    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/rotatePagesInput.pdf');
+    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/rotatePagesInput.pdf');
     rotatePagesOperation.setInput(input);
 
     // Sets angle by 90 degrees (in clockwise direction) for rotating the specified pages of
     // the input PDF file.
     const firstPageRange = getFirstPageRangeForRotation();
-    rotatePagesOperation.setAngleToRotatePagesBy(PDFToolsSdk.RotatePages.Angle._90, firstPageRange);
+    rotatePagesOperation.setAngleToRotatePagesBy(PDFServicesSdk.RotatePages.Angle._90, firstPageRange);
 
     // Sets angle by 180 degrees (in clockwise direction) for rotating the specified pages of
     // the input PDF file.
     const secondPageRange = getSecondPageRangeForRotation();
-    rotatePagesOperation.setAngleToRotatePagesBy(PDFToolsSdk.RotatePages.Angle._180,secondPageRange);
+    rotatePagesOperation.setAngleToRotatePagesBy(PDFServicesSdk.RotatePages.Angle._180,secondPageRange);
 
     // Execute the operation and Save the result to the specified location.
     rotatePagesOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/rotatePagesOutput.pdf'))
         .catch(err => {
-            if (err instanceof PDFToolsSdk.Error.ServiceApiError
-                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
+            if (err instanceof PDFServicesSdk.Error.ServiceApiError
+                || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);

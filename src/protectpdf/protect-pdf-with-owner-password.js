@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
+const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 
 /**
  * This sample illustrates how to secure a PDF file with owner password and allow certain access permissions 
@@ -19,16 +19,16 @@ const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
  */
 try {
     // Initial setup, create credentials instance.
-    const credentials = PDFToolsSdk.Credentials
+    const credentials = PDFServicesSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("pdftools-api-credentials.json")
+        .fromFile("pdfservices-api-credentials.json")
         .build();
 
     // Create an ExecutionContext using credentials
-    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials);
+    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials);
 
     // Create new permissions instance and add the required permissions
-    const protectPDF = PDFToolsSdk.ProtectPDF,
+    const protectPDF = PDFServicesSdk.ProtectPDF,
         protectPDFOptions = protectPDF.options,
         permissions = protectPDFOptions.Permissions.createNew();
     permissions.addPermission(protectPDFOptions.Permission.PRINT_LOW_QUALITY);
@@ -48,15 +48,15 @@ try {
     const protectPDFOperation = protectPDF.Operation.createNew(options);
 
     // Set operation input from a source file.
-    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/protectPDFInput.pdf');
+    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/protectPDFInput.pdf');
     protectPDFOperation.setInput(input);
 
     // Execute the operation and Save the result to the specified location.
     protectPDFOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/protectPDFWithOwnerPasswordOutput.pdf'))
         .catch(err => {
-            if(err instanceof PDFToolsSdk.Error.ServiceApiError
-                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
+            if(err instanceof PDFServicesSdk.Error.ServiceApiError
+                || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);
