@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
+const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 
 /**
  * This sample illustrates how to remove password security from a PDF document.
@@ -18,19 +18,19 @@ const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
  */
 try {
     // Initial setup, create credentials instance.
-    const credentials = PDFToolsSdk.Credentials
+    const credentials = PDFServicesSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("pdftools-api-credentials.json")
+        .fromFile("pdfservices-api-credentials.json")
         .build();
 
     // Create an ExecutionContext using credentials
-    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials);
+    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials);
 
     // Create a new operation instance.
-    const removeProtectionOperation = PDFToolsSdk.RemoveProtection.Operation.createNew(),
-        input = PDFToolsSdk.FileRef.createFromLocalFile(
+    const removeProtectionOperation = PDFServicesSdk.RemoveProtection.Operation.createNew(),
+        input = PDFServicesSdk.FileRef.createFromLocalFile(
             'resources/removeProtectionInput.pdf',
-            PDFToolsSdk.RemoveProtection.SupportedSourceFormat.pdf
+            PDFServicesSdk.RemoveProtection.SupportedSourceFormat.pdf
         );
     // Set operation input from a source file.
     removeProtectionOperation.setInput(input);
@@ -42,8 +42,8 @@ try {
     removeProtectionOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/removeProtectionOutput.pdf'))
         .catch(err => {
-            if(err instanceof PDFToolsSdk.Error.ServiceApiError
-                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
+            if(err instanceof PDFServicesSdk.Error.ServiceApiError
+                || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);

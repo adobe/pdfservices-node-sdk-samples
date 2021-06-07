@@ -1,9 +1,9 @@
-# Samples for the PDF Tools Node.js SDK
+# Samples for the PDF Services Node.js SDK
 
-This sample project helps you get started with the  PDF Tools Node.js SDK.
+This sample project helps you get started with the  PDF Services Node.js SDK.
 
 The sample JS scripts illustrate how to perform PDF-related actions (such as converting to and from the PDF format) using 
-the SDK. **Please note that the PDF Tools Node.js SDK supports only server side use cases.**
+the SDK. **Please note that the PDF Services Node.js SDK supports only server side use cases.**
 
 ## Prerequisites
 The sample application has the following requirements:
@@ -13,7 +13,7 @@ The sample application has the following requirements:
 
 ## Authentication Setup
 
-The credentials file and corresponding private key file for the samples is ```pdftools-api-credentials.json``` and ```private.key``` 
+The credentials file and corresponding private key file for the samples is ```pdfservices-api-credentials.json``` and ```private.key``` 
 respectively. Before the samples can be run, replace both the files with the ones present in the downloaded zip file at 
 the end of creation of credentials via [Get Started](https://www.adobe.io/apis/documentcloud/dcsdk/gettingstarted.html?ref=getStartedWithServicesSdk) workflow.
 
@@ -33,11 +33,11 @@ Run the following command to build the project:
 npm install
 ```
 
-Note that the PDF Tools SDK is listed as a dependency in the package.json and will be downloaded automatically.
+Note that the PDF Services SDK is listed as a dependency in the package.json and will be downloaded automatically.
 
 ## A Note on Logging
 For logging, this SDK uses the [log4js API](https://www.npmjs.com/package/log4js) . 
-Upon running, the SDK searches for a file ```config/pdftools-sdk-log4js-config.json``` in the working directory, and reads the
+Upon running, the SDK searches for a file ```config/pdfservices-sdk-log4js-config.json``` in the working directory, and reads the
 logging properties from there. If no configuration file is provided, default logging, i.e. logging INFO logs to the console is enabled. The clients can change the logging settings as per their needs.
 
 ## Running the samples
@@ -373,6 +373,77 @@ the output document in the PDF format.
 ```$xslt
 node src/documentmerge/merge-document-to-pdf.js
 ```
+
+### Extract PDF
+
+These samples illustrate extracting content of PDF in a structured JSON format along with the renditions inside PDF. 
+The output of SDK extract operation is Zip package. The Zip package consists of following:
+
+* The structuredData.json file with the extracted content & PDF element structure. See the [JSON schema](https://opensource.adobe.com/pdftools-sdk-docs/release/shared/extractJSONOutputSchema.json). Please refer the [Styling JSON schema](https://opensource.adobe.com/pdftools-sdk-docs/release/shared/extractJSONOutputSchemaStylingInfo.json) for a description of the output when the styling option is enabled.
+* A renditions folder(s) containing renditions for each element type selected as input. 
+  The folder name is either “tables” or “figures” depending on your specified element type. 
+  Each folder contains renditions with filenames that correspond to the element information in the JSON file. 
+
+#### Extract Text Elements
+
+The sample script ```extract-text-info-from-pdf.js``` extracts text elements from PDF Document.
+
+```$xslt
+node src/extractpdf/extract-text-info-from-pdf.js
+```
+
+#### Extract Text, Table Elements
+
+The sample script ```extract-text-table-info-from-pdf.js``` extracts text, table elements from PDF Document.
+
+```$xslt
+node src/extractpdf/extract-text-table-info-from-pdf.js
+```
+
+#### Extract Text, Table Elements with Renditions of Table Elements
+
+The sample script ```extract-text-table-info-with-tables-renditions-from-pdf.js``` extracts text, table elements along with table renditions from PDF Document.
+Note that the output is a zip containing the structured information along with renditions as described in [section](#extract-pdf).
+
+```$xslt
+node src/extractpdf/extract-text-table-info-with-tables-renditions-from-pdf.js
+```
+
+#### Extract Text, Table Elements with Renditions of Figure, Table Elements
+
+The sample script ```extract-text-table-info-with-figures-tables-renditions-from-pdf.js``` extracts text, table elements along with figure 
+and table element's renditions from PDF Document. Note that the output is a zip containing the structured information 
+along with renditions as described in [section](#extract-pdf).
+
+```$xslt
+node src/extractpdf/extract-text-table-info-with-figures-tables-renditions-from-pdf.js
+```
+
+#### Extract Text, Table Elements and bounding boxes for Characters present in text blocks with Renditions of Table Elements
+
+The sample script ```extract-text-table-info-with-char-bounds-from-pdf.js``` extracts text, table elements, bounding boxes for characters present in text blocks and table element's renditions from PDF Document. 
+Note that the output is a zip containing the structured information along with renditions as described in [section](#extract-pdf).
+
+```$xslt
+node src/extractpdf/extract-text-table-info-with-char-bounds-from-pdf.js
+```
+
+#### Extract Text, Table Elements with Renditions and CSV's of Table Elements
+
+The sample script ```extract-text-table-info-with-tables-structure-from-pdf.js``` extracts text, table elements, table structures as CSV and table element's renditions from PDF Document. Note that the output is a zip containing the structured information along with renditions as described in [section](#extract-pdf).
+
+```$xslt
+node src/extractpdf/extract-text-table-info-with-tables-structure-from-pdf.js
+```
+
+#### Extract Text, Table Elements with Styling information of text
+
+The sample script ```extract-text-table-info-with-styling-info-from-pdf``` extracts text and table elements along with the styling information of the text blocks. Note that the output is a zip containing the structured information along with renditions as described in [section](#extract-pdf).
+
+```$xslt
+node src/extractpdf/extract-text-table-info-with-styling-info-from-pdf.js
+```
+
 
 ### Licensing
 

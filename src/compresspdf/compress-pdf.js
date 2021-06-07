@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
+const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 
 /**
  * This sample illustrates how to compress PDF by reducing the size of the PDF file.
@@ -18,26 +18,26 @@ const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
  */
 try {
     // Initial setup, create credentials instance.
-    const credentials =  PDFToolsSdk.Credentials
+    const credentials =  PDFServicesSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("pdftools-api-credentials.json")
+        .fromFile("pdfservices-api-credentials.json")
         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials),
-        compressPDF = PDFToolsSdk.CompressPDF,
+    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
+        compressPDF = PDFServicesSdk.CompressPDF,
         compressPDFOperation = compressPDF.Operation.createNew();
 
     // Set operation input from a source file.
-    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/compressPDFInput.pdf');
+    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/compressPDFInput.pdf');
     compressPDFOperation.setInput(input);
 
     // Execute the operation and Save the result to the specified location.
     compressPDFOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/compressPDFOutput.pdf'))
         .catch(err => {
-            if(err instanceof PDFToolsSdk.Error.ServiceApiError
-                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
+            if(err instanceof PDFServicesSdk.Error.ServiceApiError
+                || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);

@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
+const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 
 /**
  * This sample illustrates how to provide documentLanguage option when creating a pdf file from docx file.
@@ -25,27 +25,27 @@ const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
  */
 const setCustomOptions = (createPdfOperation) => {
     // Select the documentLanguage for input file.
-    const documentLanguage = PDFToolsSdk.CreatePDF.options.word.SupportedDocumentLanguage.EN_US;
+    const documentLanguage = PDFServicesSdk.CreatePDF.options.word.SupportedDocumentLanguage.EN_US;
 
     // Set the desired WORD-to-PDF conversion options with documentLanguage.
-    const createPdfOptions = new PDFToolsSdk.CreatePDF.options.word.CreatePDFFromWordOptions.Builder()
+    const createPdfOptions = new PDFServicesSdk.CreatePDF.options.word.CreatePDFFromWordOptions.Builder()
         .withDocumentLanguage(documentLanguage).build();
     createPdfOperation.setOptions(createPdfOptions);
 };
 
 try {
     // Initial setup, create credentials instance.
-    const credentials =  PDFToolsSdk.Credentials
+    const credentials =  PDFServicesSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("pdftools-api-credentials.json")
+        .fromFile("pdfservices-api-credentials.json")
         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials),
-        createPdfOperation = PDFToolsSdk.CreatePDF.Operation.createNew();
+    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
+        createPdfOperation = PDFServicesSdk.CreatePDF.Operation.createNew();
 
     // Set operation input from a source file.
-        const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/createPDFInput.docx');
+        const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/createPDFInput.docx');
     createPdfOperation.setInput(input);
 
     // Provide any custom configuration options for the operation.
@@ -55,8 +55,8 @@ try {
     createPdfOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/createPDFFromDOCXWithOptionsOutput.pdf'))
         .catch(err => {
-            if(err instanceof PDFToolsSdk.Error.ServiceApiError
-                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
+            if(err instanceof PDFServicesSdk.Error.ServiceApiError
+                || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);

@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
+const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 
 /**
  * This sample illustrates how to reorder the pages in a PDF file.
@@ -19,7 +19,7 @@ const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
 
 const getPageRangeForReorder = () => {
     // Specify order of the pages for an output document.
-    const pageRanges = new PDFToolsSdk.PageRanges();
+    const pageRanges = new PDFServicesSdk.PageRanges();
 
     // Add pages 3 to 4.
     pageRanges.addPageRange(3, 4);
@@ -31,18 +31,18 @@ const getPageRangeForReorder = () => {
 };
 try {
     // Initial setup, create credentials instance.
-    const credentials = PDFToolsSdk.Credentials
+    const credentials = PDFServicesSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("pdftools-api-credentials.json")
+        .fromFile("pdfservices-api-credentials.json")
         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials),
-        reorderPagesOperation = PDFToolsSdk.ReorderPages.Operation.createNew();
+    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
+        reorderPagesOperation = PDFServicesSdk.ReorderPages.Operation.createNew();
 
     // Set operation input from a source file, along with specifying the order of the pages for
     // rearranging the pages in a PDF file.
-    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/reorderPagesInput.pdf');
+    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/reorderPagesInput.pdf');
     const pageRanges = getPageRangeForReorder();
     reorderPagesOperation.setInput(input);
     reorderPagesOperation.setPagesOrder(pageRanges);
@@ -51,8 +51,8 @@ try {
     reorderPagesOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/reorderPagesOutput.pdf'))
         .catch(err => {
-            if(err instanceof PDFToolsSdk.Error.ServiceApiError
-                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
+            if(err instanceof PDFServicesSdk.Error.ServiceApiError
+                || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);
