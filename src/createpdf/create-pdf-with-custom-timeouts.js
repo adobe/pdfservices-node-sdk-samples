@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
+const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 
 /**
  * This sample illustrates how to provide custom http timeouts for performing an operation. This enables the
@@ -19,32 +19,32 @@ const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
  */
 try {
     // Initial setup, create credentials and custom client config instance.
-    const credentials =  PDFToolsSdk.Credentials
+    const credentials =  PDFServicesSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("pdftools-api-credentials.json")
+        .fromFile("pdfservices-api-credentials.json")
         .build();
 
     // Create client config instance with custom time-outs.
-    const clientConfig = PDFToolsSdk.ClientConfig
+    const clientConfig = PDFServicesSdk.ClientConfig
         .clientConfigBuilder()
         .withConnectTimeout(10000)
         .withReadTimeout(40000)
         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials,clientConfig),
-        createPdfOperation = PDFToolsSdk.CreatePDF.Operation.createNew();
+    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials,clientConfig),
+        createPdfOperation = PDFServicesSdk.CreatePDF.Operation.createNew();
 
     // Set operation input from a source file.
-    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/createPDFInput.docx');
+    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/createPDFInput.docx');
     createPdfOperation.setInput(input);
 
     // Execute the operation and Save the result to the specified location.
     createPdfOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/createPDFFromDOCXWithCustomConfigOutput.pdf'))
         .catch(err => {
-            if(err instanceof PDFToolsSdk.Error.ServiceApiError
-                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
+            if(err instanceof PDFServicesSdk.Error.ServiceApiError
+                || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);

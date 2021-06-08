@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk'),
+const PDFServicesSdk = require('@adobe/pdfservices-node-sdk'),
     fs = require('fs');
 
 /**
@@ -22,9 +22,9 @@ const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk'),
  */
 try {
     // Initial setup, create credentials instance.
-    const credentials =  PDFToolsSdk.Credentials
+    const credentials =  PDFServicesSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("pdftools-api-credentials.json")
+        .fromFile("pdfservices-api-credentials.json")
         .build();
 
     // Setup input data for the document merge process
@@ -32,10 +32,10 @@ try {
         jsonDataForMerge = JSON.parse(jsonString);
 
     // Create an ExecutionContext using credentials
-    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials);
+    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials);
 
     // Create a new DocumentMerge options instance
-    const documentMerge = PDFToolsSdk.DocumentMerge,
+    const documentMerge = PDFServicesSdk.DocumentMerge,
         documentMergeOptions = documentMerge.options,
         options = new documentMergeOptions.DocumentMergeOptions(jsonDataForMerge, documentMergeOptions.OutputFormat.PDF);
 
@@ -43,15 +43,15 @@ try {
     const documentMergeOperation = documentMerge.Operation.createNew(options)
 
     // Set operation input document template from a source file.
-    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/salesOrderTemplate.docx');
+    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/salesOrderTemplate.docx');
     documentMergeOperation.setInput(input);
 
     // Execute the operation and Save the result to the specified location.
     documentMergeOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/salesOrderOutput.pdf'))
         .catch(err => {
-            if(err instanceof PDFToolsSdk.Error.ServiceApiError
-                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
+            if(err instanceof PDFServicesSdk.Error.ServiceApiError
+                || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);

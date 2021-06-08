@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
+const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 /**
  * This sample illustrates how to delete pages in a PDF file.
  * <p>
@@ -18,7 +18,7 @@ const PDFToolsSdk = require('@adobe/documentservices-pdftools-node-sdk');
 
 const getPageRangesForDeletion = () => {
     // Specify pages for deletion.
-    const pageRangesForDeletion = new PDFToolsSdk.PageRanges();
+    const pageRangesForDeletion = new PDFServicesSdk.PageRanges();
     // Add page 1.
     pageRangesForDeletion.addSinglePage(1);
 
@@ -29,17 +29,17 @@ const getPageRangesForDeletion = () => {
 
 try {
     // Initial setup, create credentials instance.
-    const credentials = PDFToolsSdk.Credentials
+    const credentials = PDFServicesSdk.Credentials
         .serviceAccountCredentialsBuilder()
-        .fromFile("pdftools-api-credentials.json")
+        .fromFile("pdfservices-api-credentials.json")
         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = PDFToolsSdk.ExecutionContext.create(credentials),
-        deletePagesOperation = PDFToolsSdk.DeletePages.Operation.createNew();
+    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
+        deletePagesOperation = PDFServicesSdk.DeletePages.Operation.createNew();
 
     // Set operation input from a source file.
-    const input = PDFToolsSdk.FileRef.createFromLocalFile('resources/deletePagesInput.pdf');
+    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/deletePagesInput.pdf');
     deletePagesOperation.setInput(input);
 
     // Delete pages of the document (as specified by PageRanges).
@@ -50,8 +50,8 @@ try {
     deletePagesOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/deletePagesOutput.pdf'))
         .catch(err => {
-            if (err instanceof PDFToolsSdk.Error.ServiceApiError
-                || err instanceof PDFToolsSdk.Error.ServiceUsageError) {
+            if (err instanceof PDFServicesSdk.Error.ServiceApiError
+                || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
                 console.log('Exception encountered while executing operation', err);
