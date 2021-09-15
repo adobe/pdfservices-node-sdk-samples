@@ -121,6 +121,21 @@ Please refer the sdk documentation of create-pdf-operation.js to see instruction
 node src/createpdf/create-pdf-from-static-html.js
 ```
 
+#### Create a PDF File From Static HTML file with inline CSS
+
+The sample script ```create-pdf-from-html-with-inline-css.js``` creates a PDF file from an input HTML file with inline CSS. 
+
+```$xslt
+node src/createpdf/create-pdf-from-html-with-inline-css.js
+```
+
+#### Create a PDF File From HTML specified via URL 
+
+The sample script ```create-pdf-from-url.js``` creates a PDF file from an HTML specified via URL. 
+
+```$xslt
+node src/createpdf/create-pdf-from-url.js
+```
 
 #### Create a PDF File From Dynamic HTML (via Zip Archive)
 
@@ -149,6 +164,14 @@ containing the individual images.
 
 ```$xslt
 node src/exportpdf/export-pdf-to-jpeg.js
+```
+
+#### Export a PDF File To a List of Images (JPEG)
+
+The sample script ```export-pdf-to-jpeg-list.js``` converts a PDF file's pages to a list of JPEG images.
+
+```$xslt
+node src/exportpdf/export-pdf-to-jpeg-list.js
 ```
 
 ### Combine PDF Files
@@ -444,6 +467,24 @@ The sample script ```extract-text-table-info-with-styling-info-from-pdf``` extra
 node src/extractpdf/extract-text-table-info-with-styling-info-from-pdf.js
 ```
 
+### Fetch PDF Properties
+
+These samples illustrate how to fetch properties of a PDF file in the JSON format.
+
+#### Fetch PDF Properties as a JSON File
+
+The sample script ```pdf-properties-as-file.js``` fetches the properties of an input PDF, as a JSON file.
+
+```$xslt
+node src/pdfproperties/pdf-properties-as-file.js
+```
+
+#### Fetch PDF Properties as a JSON Object
+The sample script ```pdf-properties-as-json.js``` fetches the properties of an input PDF, as a JSON Object.
+
+```$xslt
+node src/pdfproperties/pdf-properties-as-json.js
+```
 
 ### Licensing
 
