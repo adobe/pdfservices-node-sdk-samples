@@ -397,6 +397,15 @@ the output document in the PDF format.
 node src/documentmerge/merge-document-to-pdf.js
 ```
 
+#### Merge Document to DOCX with Fragments
+
+This sample script  ```merge-document-to-docx-fragments.js``` merges the Word based document template with the input JSON data and Fragments JSON to generate
+the output document in the PDF format.
+
+```$xslt
+node src/documentmerge/merge-document-to-docx-fragments.js
+```
+
 ### Extract PDF
 
 These samples illustrate extracting content of PDF in a structured JSON format along with the renditions inside PDF. 
