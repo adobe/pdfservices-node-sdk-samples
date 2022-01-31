@@ -9,8 +9,8 @@
  * written permission of Adobe.
  */
 
-const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
-const Fragments = require('@adobe/pdfservices-node-sdk/src/operation/option/documentmerge/fragments');
+const PDFServicesSdk = require('@dcloud/pdfservices-node-sdk');
+const Fragments = PDFServicesSdk.Fragments;
 /**
  * This sample illustrates how to merge the Word based document template with the input JSON data and Fragments JSON to generate
  * the output document in the docx format.
@@ -55,9 +55,7 @@ try {
     const fragment1 = JSON.parse("{\"orderDetails\": \"<b>Quantity</b>:{{quantity}}, <b>Description</b>:{{description}}, <b>Amount</b>:{{amount}}\"}");
     const fragment2 = JSON.parse("{\"customerDetails\": \"{{customerName}}, Visits: {{customerVisits}}\"}");
 
-    const fragments = new Fragments();
     const fragmentsList = [fragment1, fragment2];
-    fragments.addFragments(fragmentsList);
 
     // Create an ExecutionContext using credentials
     const executionContext = PDFServicesSdk.ExecutionContext.create(credentials);
@@ -65,7 +63,7 @@ try {
     // Create a new DocumentMerge options instance
     const documentMerge = PDFServicesSdk.DocumentMerge,
         documentMergeOptions = documentMerge.options,
-        options = new documentMergeOptions.DocumentMergeOptions(jsonDataForMerge, documentMergeOptions.OutputFormat.DOCX, fragments);
+        options = new documentMergeOptions.DocumentMergeOptions(jsonDataForMerge, documentMergeOptions.OutputFormat.DOCX, fragmentsList);
 
     // Create a new operation instance using the options instance
     const documentMergeOperation = documentMerge.Operation.createNew(options);
