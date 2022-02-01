@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const PDFServicesSdk = require('@dcloud/pdfservices-node-sdk');
+const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 const Fragments = PDFServicesSdk.Fragments;
 /**
  * This sample illustrates how to merge the Word based document template with the input JSON data and Fragments JSON to generate
