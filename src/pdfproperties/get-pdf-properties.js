@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Adobe
+ * Copyright 2019 Adobe
  * All Rights Reserved.
  *
  * NOTICE: Adobe permits you to use, modify, and distribute this file in
@@ -12,39 +12,38 @@
 const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 
 /**
- * This sample illustrates how to export a PDF file to a list of JPEG files.
- * <p>
+ * This sample illustrates how to retrieve properties of an input PDF file.
+ *
  * Refer to README.md for instructions on how to run the samples.
- * </p>
  */
-
 try {
-    // Initial setup, create credentials instance.
-    const credentials =  PDFServicesSdk.Credentials
+
+    const credentials = PDFServicesSdk.Credentials
         .serviceAccountCredentialsBuilder()
         .fromFile("pdfservices-api-credentials.json")
         .build();
 
     //Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
-        exportPDFToImages = PDFServicesSdk.ExportPDFToImages,
-        exportPdfToImagesOperation = exportPDFToImages.Operation.createNew(exportPDFToImages.SupportedTargetFormats.JPEG);
+        pdfPropertiesOperation = PDFServicesSdk.PDFProperties.Operation.createNew();
 
-    // Set operation input from a source file
-    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/exportPDFToImageInput.pdf');
-    exportPdfToImagesOperation.setInput(input);
+    // Set operation input from a source file.
+    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/pdfPropertiesInput.pdf');
+    pdfPropertiesOperation.setInput(input);
 
-    // Execute the operation and Save the result to the specified location.
-    exportPdfToImagesOperation.execute(executionContext)
+    // Provide any custom configuration options for the operation.
+    const options = new PDFServicesSdk.PDFProperties.options.PDFPropertiesOptions.Builder()
+        .includePageLevelProperties(true)
+        .build();
+    pdfPropertiesOperation.setOptions(options);
+
+    // Execute the operation and log the JSON Object.
+    pdfPropertiesOperation.execute(executionContext)
         .then(result => {
-            let saveFilesPromises = [];
-            for(let i = 0; i < result.length; i++){
-                saveFilesPromises.push(result[i].saveAsFile(`output/exportPDFToJPEGOutput_${i}.jpeg`));
-            }
-            return Promise.all(saveFilesPromises);
+            console.log("The resultant properties of the PDF are : " + JSON.stringify(result, null, 4));
         })
         .catch(err => {
-            if(err instanceof PDFServicesSdk.Error.ServiceApiError
+            if (err instanceof PDFServicesSdk.Error.ServiceApiError
                 || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
                 console.log('Exception encountered while executing operation', err);
             } else {
