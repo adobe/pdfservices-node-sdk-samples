@@ -27,14 +27,14 @@ try {
     //Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
         exportPDF = PDFServicesSdk.ExportPDF,
-        exportPdfOperation = exportPDF.Operation.createNew(exportPDF.SupportedTargetFormats.DOCX);
+        exportPDFOperation = exportPDF.Operation.createNew(exportPDF.SupportedTargetFormats.DOCX);
 
     // Set operation input from a source file
     const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/exportPDFInput.pdf');
-    exportPdfOperation.setInput(input);
+    exportPDFOperation.setInput(input);
 
     // Execute the operation and Save the result to the specified location.
-    exportPdfOperation.execute(executionContext)
+    exportPDFOperation.execute(executionContext)
         .then(result => result.saveAsFile('output/exportPdfOutput.docx'))
         .catch(err => {
             if(err instanceof PDFServicesSdk.Error.ServiceApiError

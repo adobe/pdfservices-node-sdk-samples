@@ -27,14 +27,14 @@ try {
     //Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
         exportPDFToImages = PDFServicesSdk.ExportPDFToImages,
-        exportPdfToImagesOperation = exportPDFToImages.Operation.createNew(exportPDFToImages.SupportedTargetFormats.JPEG);
+        exportPDFToImagesOperation = exportPDFToImages.Operation.createNew(exportPDFToImages.SupportedTargetFormats.JPEG);
 
     // Set operation input from a source file
     const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/exportPDFToImageInput.pdf');
-    exportPdfToImagesOperation.setInput(input);
+    exportPDFToImagesOperation.setInput(input);
 
     // Execute the operation and Save the result to the specified location.
-    exportPdfToImagesOperation.execute(executionContext)
+    exportPDFToImagesOperation.execute(executionContext)
         .then(result => {
             let saveFilesPromises = [];
             for(let i = 0; i < result.length; i++){

@@ -7,7 +7,7 @@ the SDK. **Please note that the PDF Services Node.js SDK supports only server si
 
 ## Prerequisites
 The sample application has the following requirements:
-* Node.js : Version 10.13 or above. Node installation instructions can be found 
+* Node.js : Version 14.0 or above. Node installation instructions can be found 
 [here](https://nodejs.org/en/download/).
 
 
