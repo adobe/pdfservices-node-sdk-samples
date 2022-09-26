@@ -24,7 +24,7 @@ try {
         .fromFile("pdfservices-api-credentials.json")
         .build();
 
-    //Create an ExecutionContext using credentials and create a new operation instance.
+    // Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
         exportPDF = PDFServicesSdk.ExportPDF,
         exportPDFOperation = exportPDF.Operation.createNew(exportPDF.SupportedTargetFormats.DOCX);
@@ -33,7 +33,7 @@ try {
     const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/exportPDFInput.pdf');
     exportPDFOperation.setInput(input);
 
-    // Provide any custom configuration options for the operation.
+    // Create a new ExportPDFOptions instance from the specified OCR locale and set it into the operation.
     const options = new exportPDF.options.ExportPDFOptions(exportPDF.options.ExportPDFOptions.OCRSupportedLocale.EN_US);
     exportPDFOperation.setOptions(options);
 

@@ -24,7 +24,7 @@ try {
         .fromFile("pdfservices-api-credentials.json")
         .build();
 
-    //Create an ExecutionContext using credentials and create a new operation instance.
+    // Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
         exportPDFToImages = PDFServicesSdk.ExportPDFToImages,
         exportPDFToImagesOperation = exportPDFToImages.Operation.createNew(exportPDFToImages.SupportedTargetFormats.JPEG);
