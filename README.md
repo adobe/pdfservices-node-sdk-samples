@@ -7,7 +7,7 @@ the SDK. **Please note that the PDF Services Node.js SDK supports only server si
 
 ## Prerequisites
 The sample application has the following requirements:
-* Node.js : Version 10.13 or above. Node installation instructions can be found 
+* Node.js : Version 14.0 or above. Node installation instructions can be found 
 [here](https://nodejs.org/en/download/).
 
 
@@ -147,9 +147,9 @@ node src/createpdf/create-pdf-from-dynamic-html.js
 
 ### Export PDF To Other Formats
 These samples illustrate how to export PDF files to other formats. Refer to the documentation of export-pdf-operation.js
-to see the list of supported export formats.
+and export-pdf-to-images-operation.js for supported export formats.
 
-#### Export a PDF File To a DOCX File 
+#### Export a PDF File To a DOCX File
 
 The sample script ```export-pdf-to-docx.js``` converts a PDF file to a DOCX file.
 
@@ -157,21 +157,28 @@ The sample script ```export-pdf-to-docx.js``` converts a PDF file to a DOCX file
 node src/exportpdf/export-pdf-to-docx.js
 ```
 
-#### Export a PDF File To an Image Format (JPEG)
+#### Export a PDF file to a DOCX file (apply OCR on the PDF file)
 
-The sample script ```export-pdf-to-jpeg.js``` converts a PDF file's pages to JPEG images. Note that the output is a zip archive 
-containing the individual images.
+The sample script ```export-docx-to-pdf-with-ocr-options.js``` converts a PDF file to a DOCX file. OCR processing is also performed on the input PDF file to extract text from images in the document.
 
 ```$xslt
-node src/exportpdf/export-pdf-to-jpeg.js
+node src/exportpdf/export-docx-to-pdf-with-ocr-options.js
 ```
 
-#### Export a PDF File To a List of Images (JPEG)
+#### Export a PDF File To an Image Format (JPEG)
 
-The sample script ```export-pdf-to-jpeg-list.js``` converts a PDF file's pages to a list of JPEG images.
+The sample script ```export-pdf-to-jpeg.js``` converts a PDF file's pages to a list of JPEG images.
 
 ```$xslt
-node src/exportpdf/export-pdf-to-jpeg-list.js
+node src/exportpdftoimages/export-pdf-to-jpeg.js
+```
+
+#### Export a PDF File To a Zip of Images (JPEG)
+
+The sample script ```export-pdf-to-jpeg-zip.js``` converts a PDF file's pages to JPEG images. The resulting file is a ZIP archive containing one image per page of the source PDF file.
+
+```$xslt
+node src/exportpdftoimages/export-pdf-to-jpeg-zip.js
 ```
 
 ### Combine PDF Files
@@ -476,23 +483,16 @@ The sample script ```extract-text-table-info-with-styling-info-from-pdf``` extra
 node src/extractpdf/extract-text-table-info-with-styling-info-from-pdf.js
 ```
 
-### Fetch PDF Properties
+### PDF Properties
 
-These samples illustrate how to fetch properties of a PDF file in the JSON format.
+This sample illustrates how to fetch properties of a PDF file.
 
-#### Fetch PDF Properties as a JSON File
+#### Fetch PDF Properties
 
-The sample script ```pdf-properties-as-file.js``` fetches the properties of an input PDF, as a JSON file.
-
-```$xslt
-node src/pdfproperties/pdf-properties-as-file.js
-```
-
-#### Fetch PDF Properties as a JSON Object
-The sample script ```pdf-properties-as-json.js``` fetches the properties of an input PDF, as a JSON Object.
+The sample script ```get-pdf-properties.js``` fetches the properties of an input PDF.
 
 ```$xslt
-node src/pdfproperties/pdf-properties-as-json.js
+node src/pdfproperties/get-pdf-properties.js
 ```
 
 ### Licensing

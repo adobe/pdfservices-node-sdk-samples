@@ -12,7 +12,7 @@
 const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 
 /**
- * This sample illustrates how to export a PDF file to a Word (DOCX) file
+ * This sample illustrates how to export a PDF file to a list of JPEG files.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
@@ -24,18 +24,24 @@ try {
         .fromFile("pdfservices-api-credentials.json")
         .build();
 
-    //Create an ExecutionContext using credentials and create a new operation instance.
+    // Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
-        exportPDF = PDFServicesSdk.ExportPDF,
-        exportPDFOperation = exportPDF.Operation.createNew(exportPDF.SupportedTargetFormats.DOCX);
+        exportPDFToImages = PDFServicesSdk.ExportPDFToImages,
+        exportPDFToImagesOperation = exportPDFToImages.Operation.createNew(exportPDFToImages.SupportedTargetFormats.JPEG);
 
     // Set operation input from a source file
-    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/exportPDFInput.pdf');
-    exportPDFOperation.setInput(input);
+    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/exportPDFToImageInput.pdf');
+    exportPDFToImagesOperation.setInput(input);
 
     // Execute the operation and Save the result to the specified location.
-    exportPDFOperation.execute(executionContext)
-        .then(result => result.saveAsFile('output/exportPdfOutput.docx'))
+    exportPDFToImagesOperation.execute(executionContext)
+        .then(result => {
+            let saveFilesPromises = [];
+            for(let i = 0; i < result.length; i++){
+                saveFilesPromises.push(result[i].saveAsFile(`output/exportPDFToImagesOutput_${i}.jpeg`));
+            }
+            return Promise.all(saveFilesPromises);
+        })
         .catch(err => {
             if(err instanceof PDFServicesSdk.Error.ServiceApiError
                 || err instanceof PDFServicesSdk.Error.ServiceUsageError) {

@@ -12,7 +12,9 @@
 const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 
 /**
- * This sample illustrates how to export a PDF file to a Word (DOCX) file
+ * This sample illustrates how to export a PDF file to JPEG.
+ * <p>
+ * The resulting file is a ZIP archive containing one image per page of the source PDF file
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
@@ -26,16 +28,19 @@ try {
 
     //Create an ExecutionContext using credentials and create a new operation instance.
     const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
-        exportPDF = PDFServicesSdk.ExportPDF,
-        exportPDFOperation = exportPDF.Operation.createNew(exportPDF.SupportedTargetFormats.DOCX);
+        exportPDFToImages = PDFServicesSdk.ExportPDFToImages,
+        exportPDFToImagesOperation = exportPDFToImages.Operation.createNew(exportPDFToImages.SupportedTargetFormats.JPEG);
+
+    // Set the output type to create zip of images.
+    exportPDFToImagesOperation.setOutputType(exportPDFToImages.OutputType.ZIP_OF_PAGE_IMAGES);
 
     // Set operation input from a source file
-    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/exportPDFInput.pdf');
-    exportPDFOperation.setInput(input);
+    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/exportPDFToImageInput.pdf');
+    exportPDFToImagesOperation.setInput(input);
 
     // Execute the operation and Save the result to the specified location.
-    exportPDFOperation.execute(executionContext)
-        .then(result => result.saveAsFile('output/exportPdfOutput.docx'))
+    exportPDFToImagesOperation.execute(executionContext)
+        .then(result => result[0].saveAsFile('output/exportPDFToJPEG.zip'))
         .catch(err => {
             if(err instanceof PDFServicesSdk.Error.ServiceApiError
                 || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
@@ -47,3 +52,4 @@ try {
 } catch (err) {
     console.log('Exception encountered while executing operation', err);
 }
+
