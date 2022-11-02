@@ -35,7 +35,7 @@ try {
 
     // Execute the operation and Save the result to the specified location.
     linearizePDFOperation.execute(executionContext)
-        .then(result => result.saveAsFile('output/linearizePDFOutput.pdf'))
+        .then(result => result.saveAsFile(createOutputFileDirectoryPath("output/LinearizePDF","Linearize","pdf")))
         .catch(err => {
             if(err instanceof PDFServicesSdk.Error.ServiceApiError
                 || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
@@ -44,6 +44,16 @@ try {
                 console.log('Exception encountered while executing operation', err);
             }
         });
+
+    //Generates a string containing a directory structure and file name for the output file.
+    function createOutputFileDirectoryPath(directory, name, format) {
+        let date = new Date();
+        let dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+            ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + "-" +
+            ("0" + date.getMinutes()).slice(-2) + "-" + ("0" + date.getSeconds()).slice(-2);
+        return (directory + '/' + name + '_' + dateString + '.' + format);
+    }
+
 } catch (err) {
     console.log('Exception encountered while executing operation', err);
 }

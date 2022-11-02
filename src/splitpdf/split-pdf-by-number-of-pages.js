@@ -44,7 +44,8 @@ try {
         .then(result => {
             let saveFilesPromises = [];
             for(let i = 0; i < result.length; i++){
-                saveFilesPromises.push(result[i].saveAsFile(`output/splitPDFByNumberOfPagesOutput_${i}.pdf`));
+                saveFilesPromises.push(result[i].saveAsFile(createOutputFileDirectoryPathWithIndex(
+                    "output/SplitPDFByNumberOfPages", "Split", i, "pdf")));
             }
             return Promise.all(saveFilesPromises);
         })
@@ -56,6 +57,16 @@ try {
                 console.log('Exception encountered while executing operation', err);
             }
         });
+
+    //Generates a string containing a directory structure and file name for the output file.
+    function createOutputFileDirectoryPathWithIndex(directory, name, index, format) {
+        let date = new Date();
+        let dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+            ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + "-" +
+            ("0" + date.getMinutes()).slice(-2) + "-" + ("0" + date.getSeconds()).slice(-2);
+        return (directory + '/' + name + '_' + dateString + '_' + index + '.' + format);
+    }
+
 } catch (err) {
     console.log('Exception encountered while executing operation', err);
 }

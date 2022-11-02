@@ -24,13 +24,22 @@ const PDFServicesSdk = require('@adobe/pdfservices-node-sdk'),
  */
 const prepareWriteStream = () => {
     // create output directory if it doesn't exists.
-    if (!fs.existsSync('output')) {
+    if (!fs.existsSync('output/CreatePDFAsStream')) {
         console.log('Creating output directory');
-        fs.mkdirSync('output');
+        fs.mkdirSync('output/CreatePDFAsStream');
     }
 
-    return fs.createWriteStream('output/createPDFAsStream.pdf');
+    return fs.createWriteStream(createOutputFileDirectoryPath("output/CreatePDFAsStream","Create","pdf"));
 };
+
+//Generates a string containing a directory structure and file name for the output file.
+function createOutputFileDirectoryPath(directory, name, format) {
+    let date = new Date();
+    let dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+        ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + "-" +
+        ("0" + date.getMinutes()).slice(-2) + "-" + ("0" + date.getSeconds()).slice(-2);
+    return (directory + '/' + name + '_' + dateString + '.' + format);
+}
 
 try {
     // Initial setup, create credentials instance.
