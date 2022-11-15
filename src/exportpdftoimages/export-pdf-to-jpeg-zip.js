@@ -38,10 +38,12 @@ try {
     const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/exportPDFToImageInput.pdf');
     exportPDFToImagesOperation.setInput(input);
 
+    //Generating a file name
+    let outputFilePath = createOutputFilePath();
+
     // Execute the operation and Save the result to the specified location.
     exportPDFToImagesOperation.execute(executionContext)
-        .then(result => result[0].saveAsFile(createOutputFileDirectoryPath("output/ExportPDFToImagesZip",
-            "Export","zip")))
+        .then(result => result[0].saveAsFile(outputFilePath))
         .catch(err => {
             if(err instanceof PDFServicesSdk.Error.ServiceApiError
                 || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
@@ -52,12 +54,12 @@ try {
         });
 
     //Generates a string containing a directory structure and file name for the output file.
-    function createOutputFileDirectoryPath(directory, name, format) {
+    function createOutputFilePath() {
         let date = new Date();
         let dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
             ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + "-" +
             ("0" + date.getMinutes()).slice(-2) + "-" + ("0" + date.getSeconds()).slice(-2);
-        return (directory + '/' + name + '_' + dateString + '.' + format);
+        return ("output/ExportPDFToImagesZip/export" + dateString + ".zip");
     }
 
 } catch (err) {

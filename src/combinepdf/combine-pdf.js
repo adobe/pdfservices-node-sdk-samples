@@ -35,9 +35,12 @@ try {
     combineFilesOperation.addInput(combineSource1);
     combineFilesOperation.addInput(combineSource2);
 
+    //Generating a file name
+    let outputFilePath = createOutputFilePath();
+
     // Execute the operation and Save the result to the specified location.
     combineFilesOperation.execute(executionContext)
-        .then(result => result.saveAsFile(createOutputFileDirectoryPath("output/CombinePDF","Combine","pdf")))
+        .then(result => result.saveAsFile(outputFilePath))
         .catch(err => {
             if (err instanceof PDFServicesSdk.Error.ServiceApiError
                 || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
@@ -48,12 +51,12 @@ try {
         });
 
     //Generates a string containing a directory structure and file name for the output file.
-    function createOutputFileDirectoryPath(directory, name, format) {
+    function createOutputFilePath() {
         let date = new Date();
         let dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
             ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + "-" +
             ("0" + date.getMinutes()).slice(-2) + "-" + ("0" + date.getSeconds()).slice(-2);
-        return (directory + '/' + name + '_' + dateString + '.' + format);
+        return ("output/CombinePDF/combine" + dateString + ".pdf");
     }
 
 } catch (err) {

@@ -45,9 +45,11 @@ try {
     // Set options
     extractPDFOperation.setOptions(options);
 
+    //Generating a file name
+    let outputFilePath = createOutputFilePath();
+
     extractPDFOperation.execute(executionContext)
-        .then(result => result.saveAsFile(createOutputFileDirectoryPath("output/ExtractTextTableWithFigureTableRendition",
-            "Extract","zip")))
+        .then(result => result.saveAsFile(outputFilePath))
         .catch(err => {
             if(err instanceof PDFServicesSdk.Error.ServiceApiError
                 || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
@@ -58,12 +60,12 @@ try {
         });
 
     //Generates a string containing a directory structure and file name for the output file.
-    function createOutputFileDirectoryPath(directory, name, format) {
+    function createOutputFilePath() {
         let date = new Date();
         let dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
             ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + "-" +
             ("0" + date.getMinutes()).slice(-2) + "-" + ("0" + date.getSeconds()).slice(-2);
-        return (directory + '/' + name + '_' + dateString + '.' + format);
+        return ("output/ExtractTextTableWithFigureTableRendition/extract" + dateString + ".zip");
     }
 
 } catch (err) {
