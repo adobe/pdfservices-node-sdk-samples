@@ -159,10 +159,10 @@ node src/exportpdf/export-pdf-to-docx.js
 
 #### Export a PDF file to a DOCX file (apply OCR on the PDF file)
 
-The sample script ```export-docx-to-pdf-with-ocr-options.js``` converts a PDF file to a DOCX file. OCR processing is also performed on the input PDF file to extract text from images in the document.
+The sample script ```export-pdf-to-docx-with-ocr-options.js``` converts a PDF file to a DOCX file. OCR processing is also performed on the input PDF file to extract text from images in the document.
 
 ```$xslt
-node src/exportpdf/export-docx-to-pdf-with-ocr-options.js
+node src/exportpdf/export-pdf-to-docx-with-ocr-options.js
 ```
 
 #### Export a PDF File To an Image Format (JPEG)

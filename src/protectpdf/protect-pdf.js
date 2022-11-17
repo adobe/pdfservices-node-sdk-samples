@@ -42,9 +42,12 @@ try {
     const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/protectPDFInput.pdf');
     protectPDFOperation.setInput(input);
 
+    //Generating a file name
+    let outputFilePath = createOutputFilePath();
+
     // Execute the operation and Save the result to the specified location.
     protectPDFOperation.execute(executionContext)
-        .then(result => result.saveAsFile('output/protectPDFOutput.pdf'))
+        .then(result => result.saveAsFile(outputFilePath))
         .catch(err => {
             if(err instanceof PDFServicesSdk.Error.ServiceApiError
                 || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
@@ -53,6 +56,16 @@ try {
                 console.log('Exception encountered while executing operation', err);
             }
         });
+
+    //Generates a string containing a directory structure and file name for the output file.
+    function createOutputFilePath() {
+        let date = new Date();
+        let dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+            ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + "-" +
+            ("0" + date.getMinutes()).slice(-2) + "-" + ("0" + date.getSeconds()).slice(-2);
+        return ("output/ProtectPDF/protect" + dateString + ".pdf");
+    }
+
 } catch (err) {
     console.log('Exception encountered while executing operation', err);
 }
