@@ -490,7 +490,7 @@ These samples illustrate how to provide a custom client configurations (timeouts
 and in-memory authentication credentials.
 
 #### Create a PDF File From a DOCX File (By providing custom value for timeouts)
-The sample script ```create-pdf-with-custom-timeouts``` highlights how to provide the custom value for connection timeout and read timeout.
+The sample script ```create-pdf-with-custom-timeouts.js``` highlights how to provide the custom value for connection timeout and read timeout.
 ```$xslt
 node src/customconfigurations/create-pdf-with-custom-timeouts.js
 ```
