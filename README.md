@@ -21,6 +21,12 @@ The SDK also supports providing the authentication credentials at runtime, witho
 refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-in-memory-authentication-credentials) to 
 know more.
 
+## Client Configurations
+
+The SDK supports setting up custom socket timeout or connect timeout for the API calls. Please refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-custom-value-for-timeouts) to know more.
+
+Additionally, SDK can be configured to process the documents in the specified region. Please refer this [section](#export-a-pdf-file-to-a-docx-file-by-providing-the-region) section to know more.
+
 ## Quota Exhaustion
 
 If you receive ServiceUsageError during the Samples run, it means that trial credentials have exhausted their usage quota. 
@@ -85,23 +91,6 @@ local file, it writes the result to an output stream.
 
 ```$xslt
 node src/createpdf/create-pdf-from-docx-to-output-stream.js
-```
-
-#### Create a PDF File From a DOCX File (By providing in-memory Authentication credentials)
-
-The sample script ```create-pdf-with-inmemory-auth-credentials.js``` highlights how to provide in-memory auth credentials
-for performing an operation. This enables the clients to fetch the credentials from a secret server during runtime, 
-instead of storing them in a file.
-
-Before running the sample, authentication credentials need to be updated as per the instructions in the script. 
-```$xslt
-node src/createpdf/create-pdf-with-inmemory-auth-credentials.js
-```
-
-#### Create a PDF File From a DOCX File(By providing custom value for timeouts)
-The sample script ```create-pdf-with-custom-timeouts``` highlights how to provide the custom value for connection timeout and read timeout.
-```$xslt
-node src/createpdf/create-pdf-with-custom-timeouts.js
 ```
 
 ####  Create a PDF File From a PPTX File 
@@ -493,6 +482,38 @@ The sample script ```get-pdf-properties.js``` fetches the properties of an input
 
 ```$xslt
 node src/pdfproperties/get-pdf-properties.js
+```
+
+### Custom Client Configuration
+
+These samples illustrate how to provide a custom client configurations (timeouts and region)
+and in-memory authentication credentials.
+
+#### Create a PDF File From a DOCX File (By providing custom value for timeouts)
+The sample script ```create-pdf-with-custom-timeouts.js``` highlights how to provide the custom value for connection timeout and read timeout.
+```$xslt
+node src/customconfigurations/create-pdf-with-custom-timeouts.js
+```
+
+#### Create a PDF File From a DOCX File (By providing in-memory Authentication credentials)
+
+The sample script ```create-pdf-with-inmemory-auth-credentials.js``` highlights how to provide in-memory auth credentials
+for performing an operation. This enables the clients to fetch the credentials from a secret server during runtime,
+instead of storing them in a file.
+
+Before running the sample, authentication credentials need to be updated as per the instructions in the script.
+```$xslt
+node src/customconfigurations/create-pdf-with-inmemory-auth-credentials.js
+```
+
+
+#### Export a PDF File To a DOCX File (By providing the region)
+
+The sample script ```export-pdf-with-specified-region.js``` highlights how to configure the SDK to process the documents
+in the specified region.
+
+```$xslt
+node src/customconfigurations/export-pdf-with-specified-region.js
 ```
 
 ### Licensing
