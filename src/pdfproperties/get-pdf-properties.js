@@ -37,10 +37,13 @@ try {
         .build();
     pdfPropertiesOperation.setOptions(options);
 
-    // Execute the operation and log the JSON Object.
+    // Execute the operation to get the PDF Properties object.
     pdfPropertiesOperation.execute(executionContext)
-        .then(result => {
-            console.log("The resultant properties of the PDF are : " + JSON.stringify(result, null, 4));
+        .then(pdfProperties => {
+            // Fetch the requisite properties of the specified PDF file.
+            console.log("Size of the specified PDF file: " + pdfProperties.document.fileSize);
+            console.log("Version of the specified PDF file: " + pdfProperties.document.pdfVersion);
+            console.log("Page count of the specified PDF file: " + pdfProperties.document.pageCount);
         })
         .catch(err => {
             if (err instanceof PDFServicesSdk.Error.ServiceApiError
