@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const PDFServicesSdk = require('@dcloud/pdfservices-node-sdk');
+const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 
 /**
  * This sample illustrates how to generate a tagged PDF along with a report and shift the headings in

@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-const PDFServicesSdk = require('@dcloud/pdfservices-node-sdk');
+const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 
 const args = process.argv;
 
