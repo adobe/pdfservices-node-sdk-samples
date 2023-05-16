@@ -12,8 +12,8 @@
 const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 
 /**
- * This sample illustrates how to specify the region for the SDK. This enables the client to configure the SDK to
- * process the documents in the specified region.
+ * This sample illustrates how to generate a tagged PDF along with a report and shift the headings in
+ * the output PDF file.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
@@ -25,28 +25,34 @@ try {
         .fromFile("pdfservices-api-credentials.json")
         .build();
 
-    // Create client config instance with the specified region.
-    const clientConfig = PDFServicesSdk.ClientConfig
-        .clientConfigBuilder()
-        .setRegion(PDFServicesSdk.Region.EU)
+    // Create an ExecutionContext using credentials and create a new operation instance.
+    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
+        autotagPDF = PDFServicesSdk.AutotagPDF,
+        autotagPDFOperation = autotagPDF.Operation.createNew();
+
+    // Set operation input from a source file.
+    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/autotagPDFInput.pdf');
+    autotagPDFOperation.setInput(input);
+
+    // Create Options
+    const autotagPDFOptions = new PDFServicesSdk.AutotagPDF.options.AutotagPDFOptions.Builder()
+        .shiftHeadings()
+        .generateReport()
         .build();
 
-
-    // Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials, clientConfig),
-        exportPDF = PDFServicesSdk.ExportPDF,
-        exportPDFOperation = exportPDF.Operation.createNew(exportPDF.SupportedTargetFormats.DOCX);
-
-    // Set operation input from a source file
-    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/exportPDFInput.pdf');
-    exportPDFOperation.setInput(input);
+    // Set operation options
+    autotagPDFOperation.setOptions(autotagPDFOptions);
 
     //Generating a file name
-    let outputFilePath = createOutputFilePath();
+    let outputTaggedFilePath = createOutputFilePath(".pdf");
+    let outputReportFilePath = createOutputFilePath(".xlsx");
 
     // Execute the operation and Save the result to the specified location.
-    exportPDFOperation.execute(executionContext)
-        .then(result => result.saveAsFile(outputFilePath))
+    autotagPDFOperation.execute(executionContext)
+        .then(result => {
+            result.taggedPDF.saveAsFile(outputTaggedFilePath);
+            result.report.saveAsFile(outputReportFilePath);
+        })
         .catch(err => {
             if(err instanceof PDFServicesSdk.Error.ServiceApiError
                 || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
@@ -57,12 +63,12 @@ try {
         });
 
     //Generates a string containing a directory structure and file name for the output file.
-    function createOutputFilePath() {
+    function createOutputFilePath(extension) {
         let date = new Date();
         let dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
             ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + "-" +
             ("0" + date.getMinutes()).slice(-2) + "-" + ("0" + date.getSeconds()).slice(-2);
-        return ("output/ExportPDFWithSpecifiedRegion/export" + dateString + ".docx");
+        return ("output/AutotagPDFWithOptions/autotag" + dateString + extension);
     }
 
 } catch (err) {
