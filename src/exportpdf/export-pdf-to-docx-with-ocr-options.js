@@ -20,8 +20,9 @@ const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 try {
     // Initial setup, create credentials instance.
     const credentials = PDFServicesSdk.Credentials
-        .serviceAccountCredentialsBuilder()
-        .fromFile("pdfservices-api-credentials.json")
+        .servicePrincipalCredentialsBuilder()
+        .withClientId(process.env.PDF_SERVICES_CLIENT_ID)
+        .withClientSecret(process.env.PDF_SERVICES_CLIENT_SECRET)
         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
@@ -29,7 +30,7 @@ try {
         exportPDF = PDFServicesSdk.ExportPDF,
         exportPDFOperation = exportPDF.Operation.createNew(exportPDF.SupportedTargetFormats.DOCX);
 
-    // Set operation input from a source file
+    // Set operation input from a source file.
     const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/exportPDFInput.pdf');
     exportPDFOperation.setInput(input);
 

@@ -30,8 +30,9 @@ const getPageRangesForDeletion = () => {
 try {
     // Initial setup, create credentials instance.
     const credentials = PDFServicesSdk.Credentials
-        .serviceAccountCredentialsBuilder()
-        .fromFile("pdfservices-api-credentials.json")
+        .servicePrincipalCredentialsBuilder()
+        .withClientId(process.env.PDF_SERVICES_CLIENT_ID)
+        .withClientSecret(process.env.PDF_SERVICES_CLIENT_SECRET)
         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
