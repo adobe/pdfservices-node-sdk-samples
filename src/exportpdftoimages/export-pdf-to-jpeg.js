@@ -20,8 +20,9 @@ const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 try {
     // Initial setup, create credentials instance.
     const credentials =  PDFServicesSdk.Credentials
-        .serviceAccountCredentialsBuilder()
-        .fromFile("pdfservices-api-credentials.json")
+        .servicePrincipalCredentialsBuilder()
+        .withClientId(process.env.PDF_SERVICES_CLIENT_ID)
+        .withClientSecret(process.env.PDF_SERVICES_CLIENT_SECRET)
         .build();
 
     // Create an ExecutionContext using credentials and create a new operation instance.
@@ -29,7 +30,7 @@ try {
         exportPDFToImages = PDFServicesSdk.ExportPDFToImages,
         exportPDFToImagesOperation = exportPDFToImages.Operation.createNew(exportPDFToImages.SupportedTargetFormats.JPEG);
 
-    // Set operation input from a source file
+    // Set operation input from a source file.
     const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/exportPDFToImageInput.pdf');
     exportPDFToImagesOperation.setInput(input);
 
@@ -41,7 +42,7 @@ try {
         .then(result => {
             let saveFilesPromises = [];
             for(let i = 0; i < result.length; i++){
-                saveFilesPromises.push(result[i].saveAsFile(`output/ExportPDFToImages/export${timeStamp}_${i}.jpeg`));
+                saveFilesPromises.push(result[i].saveAsFile(`output/ExportPDFToImages/export_${timeStamp}_${i}.jpeg`));
             }
             return Promise.all(saveFilesPromises);
         })

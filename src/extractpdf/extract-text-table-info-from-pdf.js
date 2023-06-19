@@ -18,8 +18,9 @@ const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
 try {
     // Initial setup, create credentials instance.
     const credentials =  PDFServicesSdk.Credentials
-        .serviceAccountCredentialsBuilder()
-        .fromFile("pdfservices-api-credentials.json")
+        .servicePrincipalCredentialsBuilder()
+        .withClientId(process.env.PDF_SERVICES_CLIENT_ID)
+        .withClientSecret(process.env.PDF_SERVICES_CLIENT_SECRET)
         .build();
 
     // Create an ExecutionContext using credentials
@@ -63,7 +64,7 @@ try {
         let dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
             ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + "-" +
             ("0" + date.getMinutes()).slice(-2) + "-" + ("0" + date.getSeconds()).slice(-2);
-        return ("output/ExtractTextInfoFromPDF/extract" + dateString + ".zip");
+        return ("output/ExtractTextTableInfoFromPDF/extract" + dateString + ".zip");
     }
 
 } catch (err) {
