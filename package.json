@@ -9,6 +9,6 @@
     "url": "git@github.com:adobe/pdfservices-node-sdk-samples.git"
   },
   "dependencies": {
-    "@adobe/pdfservices-node-sdk": "3.4.1"
+    "@adobe/pdfservices-node-sdk": "3.4.0"
   }
 }
