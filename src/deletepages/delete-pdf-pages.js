@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Adobe
+ * Copyright 2024 Adobe
  * All Rights Reserved.
  *
  * NOTICE: Adobe permits you to use, modify, and distribute this file in
@@ -9,68 +9,100 @@
  * written permission of Adobe.
  */
 
-const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
+const {
+    ServicePrincipalCredentials,
+    PDFServices,
+    MimeType,
+    DeletePagesParams,
+    PageRanges,
+    DeletePagesJob,
+    DeletePagesResult,
+    SDKError,
+    ServiceUsageError,
+    ServiceApiError
+} = require("@adobe/pdfservices-node-sdk");
+const fs = require("fs");
+
 /**
- * This sample illustrates how to delete pages in a PDF file.
+ * This sample illustrates how to delete pages in a PDF file
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
+(async () => {
+    let readStream;
+    try {
+        // Initial setup, create credentials instance
+        const credentials = new ServicePrincipalCredentials({
+            clientId: process.env.PDF_SERVICES_CLIENT_ID,
+            clientSecret: process.env.PDF_SERVICES_CLIENT_SECRET
+        });
+
+        // Creates a PDF Services instance
+        const pdfServices = new PDFServices({credentials});
+
+        // Creates an asset(s) from source file(s) and upload
+        readStream = fs.createReadStream("resources/deletePagesInput.pdf");
+        const inputAsset = await pdfServices.upload({
+            readStream,
+            mimeType: MimeType.PDF
+        });
+
+        // Delete pages of the document (as specified by PageRanges).
+        const pageRangeForDeletion = getPageRangesForDeletion();
+
+        // Create parameters for the job
+        const params = new DeletePagesParams({
+            pageRanges: pageRangeForDeletion
+        });
+
+        // Creates a new job instance
+        const job = new DeletePagesJob({inputAsset, params});
+
+        // Submit the job and get the job result
+        const pollingURL = await pdfServices.submit({job});
+        const pdfServicesResponse = await pdfServices.getJobResult({
+            pollingURL,
+            resultType: DeletePagesResult
+        });
+
+        // Get content from the resulting asset(s)
+        const resultAsset = pdfServicesResponse.result.asset;
+        const streamAsset = await pdfServices.getContent({asset: resultAsset});
+
+        // Creates a write stream and copy stream asset's content to it
+        const outputFilePath = createOutputFilePath();
+        console.log(`Saving asset at ${outputFilePath}`);
+
+        const writeStream = fs.createWriteStream(outputFilePath);
+        streamAsset.readStream.pipe(writeStream);
+    } catch (err) {
+        if (err instanceof SDKError || err instanceof ServiceUsageError || err instanceof ServiceApiError) {
+            console.log("Exception encountered while executing operation", err);
+        } else {
+            console.log("Exception encountered while executing operation", err);
+        }
+    } finally {
+        readStream?.destroy();
+    }
+})();
 
 const getPageRangesForDeletion = () => {
     // Specify pages for deletion.
-    const pageRangesForDeletion = new PDFServicesSdk.PageRanges();
+    const pageRangesForDeletion = new PageRanges();
     // Add page 1.
     pageRangesForDeletion.addSinglePage(1);
-
     // Add pages 3 to 4.
-    pageRangesForDeletion.addPageRange(3, 4);
+    pageRangesForDeletion.addRange(3, 4);
     return pageRangesForDeletion;
 };
 
-try {
-    // Initial setup, create credentials instance.
-    const credentials = PDFServicesSdk.Credentials
-        .servicePrincipalCredentialsBuilder()
-        .withClientId(process.env.PDF_SERVICES_CLIENT_ID)
-        .withClientSecret(process.env.PDF_SERVICES_CLIENT_SECRET)
-        .build();
-
-    // Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
-        deletePagesOperation = PDFServicesSdk.DeletePages.Operation.createNew();
-
-    // Set operation input from a source file.
-    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/deletePagesInput.pdf');
-    deletePagesOperation.setInput(input);
-
-    // Delete pages of the document (as specified by PageRanges).
-    const pageRangesForDeletion = getPageRangesForDeletion();
-    deletePagesOperation.setPageRanges(pageRangesForDeletion);
-
-    //Generating a file name
-    let outputFilePath = createOutputFilePath();
-
-    // Execute the operation and Save the result to the specified location.
-    deletePagesOperation.execute(executionContext)
-        .then(result => result.saveAsFile(outputFilePath))
-        .catch(err => {
-            if (err instanceof PDFServicesSdk.Error.ServiceApiError
-                || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
-                console.log('Exception encountered while executing operation', err);
-            } else {
-                console.log('Exception encountered while executing operation', err);
-            }
-        });
-
-    //Generates a string containing a directory structure and file name for the output file.
-    function createOutputFilePath() {
-        let date = new Date();
-        let dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
-            ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + "-" +
-            ("0" + date.getMinutes()).slice(-2) + "-" + ("0" + date.getSeconds()).slice(-2);
-        return ("output/DeletePDFPages/delete" + dateString + ".pdf");
-    }
-
-} catch (err) {
-    console.log('Exception encountered while executing operation', err);
+// Generates a string containing a directory structure and file name for the output file
+function createOutputFilePath() {
+    const filePath = "output/DeletePDFPages/";
+    const date = new Date();
+    const dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+        ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + "-" +
+        ("0" + date.getMinutes()).slice(-2) + "-" + ("0" + date.getSeconds()).slice(-2);
+    fs.mkdirSync(filePath, {recursive: true});
+    return (`${filePath}delete${dateString}.pdf`);
 }

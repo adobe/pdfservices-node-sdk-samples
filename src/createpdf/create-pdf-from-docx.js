@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Adobe
+ * Copyright 2024 Adobe
  * All Rights Reserved.
  *
  * NOTICE: Adobe permits you to use, modify, and distribute this file in
@@ -9,53 +9,80 @@
  * written permission of Adobe.
  */
 
-const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
+const {
+    ServicePrincipalCredentials,
+    PDFServices,
+    MimeType,
+    CreatePDFJob,
+    CreatePDFResult,
+    SDKError,
+    ServiceUsageError,
+    ServiceApiError
+} = require("@adobe/pdfservices-node-sdk");
+const fs = require("fs");
 
 /**
  * This sample illustrates how to create a PDF file from a DOCX file.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
-try {
-    // Initial setup, create credentials instance.
-    const credentials =  PDFServicesSdk.Credentials
-        .servicePrincipalCredentialsBuilder()
-        .withClientId(process.env.PDF_SERVICES_CLIENT_ID)
-        .withClientSecret(process.env.PDF_SERVICES_CLIENT_SECRET)
-        .build();
-
-    // Create an ExecutionContext using credentials and create a new operation instance.
-    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials),
-        createPdfOperation = PDFServicesSdk.CreatePDF.Operation.createNew();
-
-    // Set operation input from a source file.
-    const input = PDFServicesSdk.FileRef.createFromLocalFile('resources/createPDFInput.docx');
-    createPdfOperation.setInput(input);
-
-    //Generating a file name
-    let outputFilePath = createOutputFilePath();
-
-    // Execute the operation and Save the result to the specified location.
-    createPdfOperation.execute(executionContext)
-        .then(result => result.saveAsFile(outputFilePath))
-        .catch(err => {
-            if(err instanceof PDFServicesSdk.Error.ServiceApiError
-                || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
-                console.log('Exception encountered while executing operation', err);
-            } else {
-                console.log('Exception encountered while executing operation', err);
-            }
+(async () => {
+    let readStream;
+    try {
+        // Initial setup, create credentials instance
+        const credentials = new ServicePrincipalCredentials({
+            clientId: process.env.PDF_SERVICES_CLIENT_ID,
+            clientSecret: process.env.PDF_SERVICES_CLIENT_SECRET
         });
 
-    //Generates a string containing a directory structure and file name for the output file.
-    function createOutputFilePath() {
-        let date = new Date();
-        let dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
-            ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + "-" +
-            ("0" + date.getMinutes()).slice(-2) + "-" + ("0" + date.getSeconds()).slice(-2);
-        return ("output/CreatePDFFromDOCX/create" + dateString + ".pdf");
-    }
+        // Creates a PDF Services instance
+        const pdfServices = new PDFServices({credentials});
 
-} catch (err) {
-    console.log('Exception encountered while executing operation', err);
+        // Creates an asset(s) from source file(s) and upload
+        readStream = fs.createReadStream("resources/createPDFInput.docx");
+        const inputAsset = await pdfServices.upload({
+            readStream,
+            mimeType: MimeType.DOCX
+        });
+
+        // Creates a new job instance
+        const job = new CreatePDFJob({inputAsset});
+
+        // Submit the job and get the job result
+        const pollingURL = await pdfServices.submit({job});
+        const pdfServicesResponse = await pdfServices.getJobResult({
+            pollingURL,
+            resultType: CreatePDFResult
+        });
+
+        // Get content from the resulting asset(s)
+        const resultAsset = pdfServicesResponse.result.asset;
+        const streamAsset = await pdfServices.getContent({asset: resultAsset});
+
+        // Creates an output stream and copy result asset's content to it
+        const outputFilePath = createOutputFilePath();
+        console.log(`Saving asset at ${outputFilePath}`);
+
+        const outputStream = fs.createWriteStream(outputFilePath);
+        streamAsset.readStream.pipe(outputStream);
+    } catch (err) {
+        if (err instanceof SDKError || err instanceof ServiceUsageError || err instanceof ServiceApiError) {
+            console.log("Exception encountered while executing operation", err);
+        } else {
+            console.log("Exception encountered while executing operation", err);
+        }
+    } finally {
+        readStream?.destroy();
+    }
+})();
+
+// Generates a string containing a directory structure and file name for the output file
+function createOutputFilePath() {
+    const filePath = "output/CreatePDFFromDOCX/";
+    const date = new Date();
+    const dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+        ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + "-" +
+        ("0" + date.getMinutes()).slice(-2) + "-" + ("0" + date.getSeconds()).slice(-2);
+    fs.mkdirSync(filePath, {recursive: true});
+    return (`${filePath}create${dateString}.pdf`);
 }

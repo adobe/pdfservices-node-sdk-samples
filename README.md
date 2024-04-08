@@ -2,19 +2,22 @@
 
 This sample project helps you get started with the  PDF Services Node.js SDK.
 
-The sample JS scripts illustrate how to perform PDF-related actions (such as converting to and from the PDF format) using 
+The sample JS scripts illustrate how to perform PDF-related actions (such as converting to and from the PDF format) using
 the SDK. **Please note that the PDF Services Node.js SDK supports only server side use cases.**
 
 ## Prerequisites
 The sample application has the following requirements:
-* Node.js : Version 14.0 or above. Node installation instructions can be found 
-[here](https://nodejs.org/en/download/).
+* Node.js : Version 18.0 or above. Node installation instructions can be found
+  [here](https://nodejs.org/en/download/).
 
 
 ## Authentication Setup
 
 The credentials file for the samples is ```pdfservices-api-credentials.json```.
-Before the samples can be run, set the environment variables `PDF_SERVICES_CLIENT_ID` and `PDF_SERVICES_CLIENT_SECRET` from the `pdfservices-api-credentials.json` file downloaded at the end of creation of credentials via [Get Started](https://www.adobe.io/apis/documentcloud/dcsdk/gettingstarted.html?ref=getStartedWithServicesSdk) workflow by running the following commands :
+Before the samples can be run, set the environment variables `PDF_SERVICES_CLIENT_ID` and `PDF_SERVICES_CLIENT_SECRET`
+from the `pdfservices-api-credentials.json` file downloaded at the end of creation of credentials via
+[Get Started](https://www.adobe.io/apis/documentcloud/dcsdk/gettingstarted.html?ref=getStartedWithServicesSdk) workflow
+by running the following commands :
 
 1. For MacOS/Linux Users :
 ```$xlst
@@ -30,13 +33,20 @@ set PDF_SERVICES_CLIENT_SECRET=<YOUR CLIENT SECRET>
 
 ## Client Configurations
 
-The SDK supports setting up custom socket timeout or connect timeout for the API calls. Please refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-custom-value-for-timeouts) to know more.
+The SDK supports setting up custom request timeout for the API calls. Please refer this
+[section](#create-a-pdf-file-from-a-docx-file-by-providing-custom-value-for-timeouts) to know more.
 
-Additionally, SDK can be configured to process the documents in the specified region. Please refer this [section](#export-a-pdf-file-to-a-docx-file-by-providing-the-region) section to know more.
+The SDK also supports setting up Proxy Server configurations which helps in successful API calls for network where all
+outgoing calls have to go through a proxy else, they are blocked. Please
+refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-proxy-server-settings) to
+know more.
+
+Additionally, SDK can be configured to process the documents in the specified region. Please refer this
+[section](#export-a-pdf-file-to-a-docx-file-by-providing-the-region) section to know more.
 
 ## Quota Exhaustion
 
-If you receive ServiceUsageError during the Samples run, it means that trial credentials have exhausted their usage quota. 
+If you receive ServiceUsageError during the Samples run, it means that trial credentials have exhausted their usage quota.
 Please [contact us](https://www.adobe.com/go/pdftoolsapi_requestform) to get paid credentials.
 
 ## Build with npm
@@ -49,24 +59,24 @@ npm install
 Note that the PDF Services SDK is listed as a dependency in the package.json and will be downloaded automatically.
 
 ## A Note on Logging
-For logging, this SDK uses the [log4js API](https://www.npmjs.com/package/log4js) . 
+For logging, this SDK uses the [log4js API](https://www.npmjs.com/package/log4js) .
 Upon running, the SDK searches for a file ```config/pdfservices-sdk-log4js-config.json``` in the working directory, and reads the
 logging properties from there. If no configuration file is provided, default logging, i.e. logging INFO logs to the console is enabled. The clients can change the logging settings as per their needs.
 
 ## Running the samples
 
-The following sub-sections describe how to run the samples. Prior to running the samples, check that the configuration 
+The following sub-sections describe how to run the samples. Prior to running the samples, check that the configuration
 file is set up as described above and that the project has been built.
 
-The samples code is available under the ```src``` folder. Test 
-files used by the samples can be found in the ```resources``` folder. When executed, all samples create an ```output``` 
+The samples code is available under the ```src``` folder. Test
+files used by the samples can be found in the ```resources``` folder. When executed, all samples create an ```output```
 child folder under the project root directory to store their results.
 
 ### Create a PDF File
-These samples illustrate how to convert files of some formats to PDF. Refer the sdk documentation of create-pdf-operation.js 
+These samples illustrate how to convert files of some formats to PDF. Refer the sdk documentation of create-pdf-operation.js
 to see the list of all supported media types which can be converted to PDF.
 
-#### Create a PDF File From a DOCX File 
+#### Create a PDF File From a DOCX File
 
 The sample script ```create-pdf-from-docx.js``` creates a PDF file from a DOCX file.
 
@@ -83,28 +93,7 @@ the language of input file.
 node src/createpdf/create-pdf-from-docx-with-options.js
 ```
 
-#### Create a PDF File From a DOCX Readable Stream
-
-The sample script ```create-pdf-from-docx-stream.js``` creates a PDF file from a readable DOCX stream.
-
-```$xslt
-node src/createpdf/create-pdf-from-docx-stream.js
-```
-
-#### Create a PDF File From a DOCX File (Write to an OutputStream)
-
-The sample script ```create-pdf-from-docx-to-output-stream.js``` creates a PDF file from a DOCX file. Instead of saving the result to a 
-local file, it writes the result to an output stream.
-
-```$xslt
-node src/createpdf/create-pdf-from-docx-to-output-stream.js
-```
-
-
-
-
-
-####  Create a PDF File From a PPTX File 
+####  Create a PDF File From a PPTX File
 
 The sample script ```create-pdf-from-pptx.js``` creates a PDF file from a PPTX file.
 
@@ -112,44 +101,52 @@ The sample script ```create-pdf-from-pptx.js``` creates a PDF file from a PPTX f
 node src/createpdf/create-pdf-from-pptx.js
 ```
 
-#### Create a PDF File From Static HTML (via Zip Archive)
-
-The sample script ```create-pdf-from-static-html.js``` creates a PDF file from a zip file containing the input HTML file and its resources. 
-Please refer the sdk documentation of create-pdf-operation.js to see instructions on the structure of the zip file.
-
-```$xslt
-node src/createpdf/create-pdf-from-static-html.js
-```
+### Create a PDF File From HTML
+These samples illustrate how to convert HTML to PDF.
+Refer the [HTML to PDF API documentation](https://developer.adobe.com/document-services/docs/apis/#tag/Html-to-PDF/operation/pdfoperations.htmltopdf)
+to see instructions on the structure of the zip file.
 
 #### Create a PDF File From Static HTML file with inline CSS
 
-The sample script ```create-pdf-from-html-with-inline-css.js``` creates a PDF file from an input HTML file with inline CSS. 
+The sample script ```html-with-inline-css-to-pdf.js``` creates a PDF file from an input HTML file with inline CSS.
 
 ```$xslt
-node src/createpdf/create-pdf-from-html-with-inline-css.js
+node src/htmltopdf/html-with-inline-css-to-pdf.js
 ```
 
-#### Create a PDF File From HTML specified via URL 
+#### Create a PDF File From HTML specified via URL
 
-The sample script ```create-pdf-from-url.js``` creates a PDF file from an HTML specified via URL. 
+The sample script ```html-to-pdf-from-url.js``` creates a PDF file from an HTML specified via URL.
 
 ```$xslt
-node src/createpdf/create-pdf-from-url.js
+node src/htmltopdf/html-to-pdf-from-url.js
+```
+
+#### Create a PDF File From Static HTML (via Zip Archive)
+
+The sample script ```static-html-to-pdf.js``` creates a PDF file from a zip file containing the input HTML file and its resources.
+Please refer the sdk documentation of create-pdf-operation.js to see instructions on the structure of the zip file.
+
+```$xslt
+node src/htmltopdf/static-html-to-pdf.js
 ```
 
 #### Create a PDF File From Dynamic HTML (via Zip Archive)
 
-The sample script ```create-pdf-from-dynamic-html.js``` converts a zip file, containing the input HTML file and its resources, along with the input data to a PDF file. The input data is used by the javascript in the HTML file to manipulate the HTML DOM, thus effectively updating the source HTML file. This mechanism can be used to provide data to the template HTML dynamically and then, convert it into a PDF file.
+The sample script ```dynamic-html-to-pdf.js``` converts a zip file, containing the input HTML file and its
+resources, along with the input data to a PDF file. The input data is used by the javascript in the HTML file to
+manipulate the HTML DOM, thus effectively updating the source HTML file. This mechanism can be used to provide data to
+the template HTML dynamically and then, convert it into a PDF file.
 
 ```$xslt
-node src/createpdf/create-pdf-from-dynamic-html.js
+node src/htmltopdf/dynamic-html-to-pdf.js
 ```
 
 ### Export PDF To Other Formats
-These samples illustrate how to export PDF files to other formats. Refer to the documentation of export-pdf-operation.js 
+These samples illustrate how to export PDF files to other formats. Refer to the documentation of export-pdf-operation.js
 and export-pdf-to-images-operation.js for supported export formats.
 
-#### Export a PDF File To a DOCX File 
+#### Export a PDF File To a DOCX File
 
 The sample script ```export-pdf-to-docx.js``` converts a PDF file to a DOCX file.
 
@@ -196,13 +193,13 @@ node src/combinepdf/combine-pdf.js
 #### Combine Specific Pages of Multiple PDF Files
 
 The sample script ```combine-pdf-with-page-ranges.js``` combines specific pages of multiple PDF files into into a single PDF file.
- 
+
 ```$xslt
 node src/combinepdf/combine-pdf-with-page-ranges.js
 ```
 
 ### OCR PDF File
-These samples illustrate how to apply OCR(Optical Character Recognition) to a PDF file and convert it to a searchable copy of your PDF. 
+These samples illustrate how to apply OCR(Optical Character Recognition) to a PDF file and convert it to a searchable copy of your PDF.
 The supported input format is application/pdf.
 
 #### Convert a PDF File into a Searchable PDF File
@@ -245,7 +242,7 @@ node src/compresspdf/compress-pdf-with-options.js
 
 ### Linearize PDF File
 
-The sample illustrates how to convert a PDF file into a Linearized (also known as "web optimized") PDF file. Such PDF files are 
+The sample illustrates how to convert a PDF file into a Linearized (also known as "web optimized") PDF file. Such PDF files are
 optimized for incremental access in network environments.
 
 #### Convert a PDF File into a Web Optimized File
@@ -382,13 +379,13 @@ node src/splitpdf/split-pdf-by-page-ranges.js
 
 ### Document Merge
 Adobe Document Merge Operation allows you to produce high fidelity PDF and Word documents with dynamic data inputs.
-Using this operation, you can merge your JSON data with Word templates to create dynamic documents for 
+Using this operation, you can merge your JSON data with Word templates to create dynamic documents for
 contracts and agreements, invoices, proposals, reports, forms, branded marketing documents and more.
 To know more about document generation and document templates, please checkout the [documentation](http://www.adobe.com/go/dcdocgen_overview_doc)
 
 #### Merge Document to DOCX
 
-The sample script ```merge-document-to-docx.js``` merges the Word based document template with the input JSON data to generate 
+The sample script ```merge-document-to-docx.js``` merges the Word based document template with the input JSON data to generate
 the output document in the DOCX format
 
 ```$xslt
@@ -398,7 +395,7 @@ node src/documentmerge/merge-document-to-docx.js
 #### Merge Document to PDF
 
 This sample script  ```merge-document-to-pdf.js``` merges the Word based document template with the input JSON data to generate
-the output document in the PDF format. 
+the output document in the PDF format.
 
 ```$xslt
 node src/documentmerge/merge-document-to-pdf.js
@@ -436,16 +433,24 @@ This sample script  ```electronic-seal-with-appearance-options.js``` uses the se
 node src/electronicseal/electronic-seal-with-appearance-options.js
 ```
 
+#### Apply Electronic Seal With Trusted Timestamp
+
+The sample script ```electronic-seal-with-stamp-authority.js``` uses a time stamp authority to apply electronic seal
+with trusted timestamp over the PDF document.
+
+```$xslt
+node src/electronicseal/electronic-seal-with-stamp-authority.js
+```
 
 ### Extract PDF
 
-These samples illustrate extracting content of PDF in a structured JSON format along with the renditions inside PDF. 
+These samples illustrate extracting content of PDF in a structured JSON format along with the renditions inside PDF.
 The output of SDK extract operation is Zip package. The Zip package consists of following:
 
 * The structuredData.json file with the extracted content & PDF element structure. See the [JSON schema](https://opensource.adobe.com/pdftools-sdk-docs/release/shared/extractJSONOutputSchema.json). Please refer the [Styling JSON schema](https://opensource.adobe.com/pdftools-sdk-docs/release/shared/extractJSONOutputSchemaStylingInfo.json) for a description of the output when the styling option is enabled.
-* A renditions folder(s) containing renditions for each element type selected as input. 
-  The folder name is either “tables” or “figures” depending on your specified element type. 
-  Each folder contains renditions with filenames that correspond to the element information in the JSON file. 
+* A renditions folder(s) containing renditions for each element type selected as input.
+  The folder name is either “tables” or “figures” depending on your specified element type.
+  Each folder contains renditions with filenames that correspond to the element information in the JSON file.
 
 #### Extract Text Elements
 
@@ -474,17 +479,27 @@ node src/extractpdf/extract-text-table-info-with-tables-renditions-from-pdf.js
 
 #### Extract Text, Table Elements with Renditions of Figure, Table Elements
 
-The sample script ```extract-text-table-info-with-figures-tables-renditions-from-pdf.js``` extracts text, table elements along with figure 
-and table element's renditions from PDF document. Note that the output is a zip containing the structured information 
+The sample script ```extract-text-table-info-with-figures-tables-renditions-from-pdf.js``` extracts text, table elements along with figure
+and table element's renditions from PDF document. Note that the output is a zip containing the structured information
 along with renditions as described in [section](#extract-pdf).
 
 ```$xslt
 node src/extractpdf/extract-text-table-info-with-figures-tables-renditions-from-pdf.js
 ```
 
+#### Extract Text Elements and bounding boxes for Characters present in text blocks
+
+The sample script ```extract-text-table-info-with-char-bounds-from-pdf.js``` extracts text elements and bounding boxes
+for characters present in text blocks. Note that the output is a zip containing the structured information
+along with renditions as described in [section](#extract-pdf).
+
+```$xslt
+node src/extractpdf/extract-text-table-info-with-char-bounds-from-pdf.js
+```
+
 #### Extract Text, Table Elements and bounding boxes for Characters present in text blocks with Renditions of Table Elements
 
-The sample script ```extract-text-table-info-with-char-bounds-from-pdf.js``` extracts text, table elements, bounding boxes for characters present in text blocks and table element's renditions from PDF document. 
+The sample script ```extract-text-table-info-with-char-bounds-from-pdf.js``` extracts text, table elements, bounding boxes for characters present in text blocks and table element's renditions from PDF document.
 Note that the output is a zip containing the structured information along with renditions as described in [section](#extract-pdf).
 
 ```$xslt
@@ -521,15 +536,34 @@ node src/pdfproperties/get-pdf-properties.js
 
 ### Custom Client Configuration
 
-These samples illustrate how to provide a custom client configurations (timeouts and region).
+These samples illustrate how to provide a custom client configurations(timeouts, proxy etc.).
 
 #### Create a PDF File From a DOCX File (By providing custom value for timeouts)
-The sample script ```create-pdf-with-custom-timeouts``` highlights how to provide the custom value for connection timeout and read timeout.
+The sample script ```create-pdf-with-custom-timeouts``` highlights how to provide the custom value for timeout.
+
 ```$xslt
 node src/customconfigurations/create-pdf-with-custom-timeouts.js
 ```
 
-#### Export a PDF File To a DOCX File (By providing the region)
+#### Create a PDF File From a DOCX File (By providing Proxy Server settings)
+
+The sample script ```create-pdf-with-proxy-server.js``` highlights how to provide Proxy Server configurations to allow
+all API calls via that proxy Server.
+
+```$xslt
+node src/customconfigurations/create-pdf-with-proxy-server.js
+```
+
+#### Create a PDF File From a DOCX File (By providing Proxy Server settings with authentication)
+
+The sample script ```create-pdf-with-authenticated-proxy-server.js``` highlights how to provide Proxy Server
+configurations to allow all API calls via that proxy Server that requires authentication.
+
+```$xslt
+node src/customconfigurations/create-pdf-with-authenticated-proxy-server.js
+```
+
+#### Export a PDF File to a DOCX File (By providing the region)
 
 The sample script ```export-pdf-with-specified-region.js``` highlights how to configure the SDK to process the documents
 in the specified region.
@@ -574,6 +608,25 @@ Here is a sample list of command line arguments and their description: </br>
 node src/autotag/autotag-pdf-parameterised.js --report --shift_headings --input resources/autotagPdfInput.pdf --output output/
 ```
 
+### External Input / Output Storage
+These samples illustrate how to use external input and output storage for the supported operations.
+
+####  Create a PDF File From a DOCX File Using External Input Storage
+
+The sample script ```external-input-create-pdf-from-docx.js``` creates a PDF file from a DOCX file stored at external storage.
+
+```$xslt
+node src/externalstorage/external-input-create-pdf-from-docx.js
+```
+
+####  Create a PDF File From a DOCX File Using External Input Storage and Store the Result in External Output Storage
+
+The sample script ```external-input-and-output-create-pdf-from-docx.js``` creates a PDF file from a DOCX file stored at
+external storage and stores the result in external output storage.
+
+```$xslt
+node src/externalstorage/external-input-and-output-create-pdf-from-docx.js
+```
 
 ### Licensing
 
