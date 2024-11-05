@@ -119,7 +119,7 @@ function getPageRangesForWatermark() {
 
 // Generates a string containing a directory structure and file name for the output file
 function createOutputFilePath() {
-    const filePath = "output/watermark/";
+    const filePath = "output/PDFWatermarkWithOptions/";
     const date = new Date();
     const dateString = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
         ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + "-" +
