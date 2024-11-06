@@ -608,6 +608,46 @@ Here is a sample list of command line arguments and their description: </br>
 node src/autotag/autotag-pdf-parameterised.js --report --shift_headings --input resources/autotagPdfInput.pdf --output output/
 ```
 
+### Accessibility Checker
+
+These samples illustrate how to check the accessibility of a PDF file
+
+#### Check Accessibility of a PDF File
+
+The sample script `pdf-accessibility-checker.js` checks the accessibility of an input PDF.
+
+```$xslt
+node src/pdfaccessibilitychecker/pdf-accessibility-checker.js
+```
+
+#### Check Accessibility of a PDF File for given page range
+
+The sample script `pdf-accessibility-checker-with-options.js` checks the accessibility of an input PDF for given page start and page end.
+
+```$xslt
+node src/pdfaccessibilitychecker/pdf-accessibility-checker-with-options.js
+```
+
+### PDF Watermark
+
+These samples illustrate how to add a watermark in PDF document.
+
+#### Add Watermark in PDF Document
+
+The sample script ```pdf-watermark.js``` adds a watermark to the input PDF document using a source watermark PDF. The first page of source watermark PDF will be added as a watermark in input PDF document.
+
+```$xslt
+node src/pdfwatermark/pdf-watermark.js
+```
+
+#### Add Watermark in PDF Document with options
+
+The sample script ```pdf-watermark-with-options.js``` adds a watermark to the input PDF document using a source watermark PDF by setting opacity and appearOnForeground options.
+
+```$xslt
+node src/pdfwatermark/pdf-watermark-with-options.js
+```
+
 ### External Input / Output Storage
 These samples illustrate how to use external input and output storage for the supported operations.
 
